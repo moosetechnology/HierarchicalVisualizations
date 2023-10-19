@@ -71,7 +71,7 @@ HVisualizationExamples >> example05WithPackages [
 	<script: 'self new example05WithPackages open'>
 	| b nodes |
 	b := HPharoNodeBuilder new.
-	b packageQuery: 'Roassal3-Chart*'.
+	b packageQuery: 'Roassal-Chart*'.
 	b build.
 	nodes := b rootNode children flatCollect: [ :node | node children ].
 	nodes do: [ :node | node collapse ].
@@ -83,7 +83,7 @@ HVisualizationExamples >> example06WithManyPackages [
 	<script: 'self new example06WithManyPackages open'>
 	| b |
 	b := HPharoNodeBuilder new.
-	b packageQuery: 'Roassal3*'.
+	b packageQuery: 'Roassal*'.
 	b build.
 	b rootNode children do: [ :node | node collapse ].
 	^ b rootNode
@@ -104,7 +104,7 @@ HVisualizationExamples >> example08RSChart [
 	<script: 'self new example08RSChart open'>
 	| b |
 	b := HPharoNodeBuilder new.
-	b packageQuery: 'Roassal3-Chart*'.
+	b packageQuery: 'Roassal-Chart*'.
 	b build.
 	^ b rootNode
 ]
@@ -127,7 +127,7 @@ HVisualizationExamples >> example10RSChartLabeler [
 	b := HPharoNodeBuilder new.
 	style := HDefaultStyle new.
 	b nodeStyle: style.
-	b packageQuery: 'Roassal3-Chart*'.
+	b packageQuery: 'Roassal-Chart*'.
 	b build.
 	
 	visualization := HSimpleVisualizationBuilder new.

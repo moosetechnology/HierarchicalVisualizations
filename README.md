@@ -1,8 +1,8 @@
 # HierarchicalVisualizations
 
-[![CI/Pharo9](https://github.com/ObjectProfile/HierarchicalVisualizations/actions/workflows/runTests.yml/badge.svg)](https://github.com/ObjectProfile/HierarchicalVisualizations/actions/workflows/runTests.yml)
+[![CI/Pharo9](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/runTests.yml/badge.svg)](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/runTests.yml)
 
-This project provide a small API to build hierarchical visualization using the [Pharo](http://pharo.org) programming language. HierarchicalVisualizations uses [Roassal](https://github.com/ObjectProfile/Roassal3).
+This project provide a small API to build hierarchical visualization using the [Pharo](http://pharo.org) programming language. HierarchicalVisualizations uses [Roassal](https://github.com/pharo-graphics/Roassal).
 
 ### Install
 
@@ -11,7 +11,7 @@ Execute the following code snippet in a Playground:
 ```Smalltalk
 [ Metacello new
     baseline: 'HierarchicalVisualizations';
-    repository: 'github://ObjectProfile/HierarchicalVisualizations:main';
+    repository: 'github://moosetechnology/HierarchicalVisualizations:main';
     load ] on: MCMergeOrLoadWarning do: [:warning | warning load ]
 ```
 
@@ -45,7 +45,7 @@ Node can be collapsed or expanded:
 
 <img width="496" alt="image" src="https://user-images.githubusercontent.com/393742/132356828-8dcd18d6-87d4-4cbe-8644-3b4ff91c1584.png">
 
-New menu items can be defined by creating a subclass of `HAbstractMenuItem`. The package [`Hierarchical-Roassal3-Menu`](https://github.com/ObjectProfile/HierarchicalVisualizations/tree/main/src/Hierarchical-Roassal3-Menu) contains many examples on how to define a new menu item.
+New menu items can be defined by creating a subclass of `HAbstractMenuItem`. The package [`Hierarchical-Roassal-Menu`](https://github.com/moosetechnology/HierarchicalVisualizations/tree/main/src/Hierarchical-Roassal-Menu) contains many examples on how to define a new menu item.
 
 Roassal's layouts may be set in a `HNode`, as for example:
 

@@ -1,5 +1,5 @@
 "
-Baseline of hierarchical project https://github.com/ObjectProfile/HierarchicalVisualizations
+Baseline of hierarchical project https://github.com/moosetechnology/HierarchicalVisualizations
 "
 Class {
 	#name : #BaselineOfHierarchicalVisualizations,
@@ -16,21 +16,21 @@ BaselineOfHierarchicalVisualizations >> baseline: spec [
 		hasCanvas ifFalse: [ 
 			spec
 				baseline: 'Roassal'
-				with: [ spec repository: 'github://pharo-graphics/Roassal/src' ].
+				with: [ spec repository: 'github://pharo-graphics/Roassal:v1.04b' ].
 			spec
 				baseline: 'RoassalExporters'
-				with: [ spec repository: 'github://pharo-graphics/RoassalExporters' ].
+				with: [ spec repository: 'github://pharo-graphics/RoassalExporters:v1.01' ].
 		].
 		spec
 			package: 'Hierarchical-Model-Events';
 			package: 'Hierarchical-Model';
 			package: 'Hierarchical-Model-Tests';
 			package: 'Hierarchical-Builder';
-			package: 'Hierarchical-Roassal3' with: [
+			package: 'Hierarchical-Roassal' with: [
 				hasCanvas ifFalse: [ spec requires: #('Roassal') ]];
-			package: 'Hierarchical-Roassal3-Menu';
+			package: 'Hierarchical-Roassal-Menu';
 			package: 'Hierarchical-Examples';
-			package: 'Hierarchical-Roassal3-Tests'.
+			package: 'Hierarchical-Roassal-Tests'.
 		
 		"Groups"
 		spec
@@ -39,6 +39,6 @@ BaselineOfHierarchicalVisualizations >> baseline: spec [
 				   'Hierarchical-Model-Tests' 'Hierarchical-Builder' );
 			group: 'default'
 			with:
-				#( 'Core' 'Hierarchical-Roassal3' 'Hierarchical-Roassal3-Menu'
-				   'Hierarchical-Roassal3-Tests' 'Hierarchical-Examples' ) ]
+				#( 'Core' 'Hierarchical-Roassal' 'Hierarchical-Roassal-Menu'
+				   'Hierarchical-Roassal-Tests' 'Hierarchical-Examples' ) ]
 ]
