@@ -8,7 +8,7 @@ Class {
 	#category : #'Hierarchical-Roassal-Tests'
 }
 
-{ #category : #tests }
+{ #category : #'building suites' }
 HStyleTest class >> testParameters [
 	^ ParametrizedTestMatrix new
 		forSelector: #styleClass

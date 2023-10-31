@@ -76,3 +76,13 @@ HMenuBuilderTest >> testMenuForNode [
 	self assert:
 		(items anySatisfy: [ :i | i class = HInspectorMenuItem ])
 ]
+
+{ #category : #tests }
+HMenuBuilderTest >> testSubmenuLayouts [
+   |menuItem menuMorph|
+ 	menuItem := HRelayoutCanvasMenuItem new.
+	menuMorph := MenuMorph new.
+	menuItem buildOn: menuMorph.
+	self assert: menuMorph items size equals: 1.
+	self assert: menuMorph lastItem subMenu items size equals: menuItem class definedLayouts size.
+]
