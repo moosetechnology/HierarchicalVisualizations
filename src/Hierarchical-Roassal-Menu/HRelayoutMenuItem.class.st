@@ -7,6 +7,12 @@ Class {
 	#category : #'Hierarchical-Roassal-Menu'
 }
 
+{ #category : #accessing }
+HRelayoutMenuItem class >> definedLayouts [ 
+	 ^ { RSGridLayout . RSFlowLayout . RSCircleLayout }.
+
+]
+
 { #category : #execution }
 HRelayoutMenuItem >> applyLayout: node [
 	node children do: [ :child | child position: nil ].
