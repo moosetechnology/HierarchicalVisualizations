@@ -8,11 +8,37 @@ Class {
 }
 
 { #category : #execution }
-HRelayoutMenuItem >> execute [
-	| node |
-	node := shape model.
+HRelayoutMenuItem >> applyLayout: node [
 	node children do: [ :child | child position: nil ].
 	visualization rebuildShape: shape.
+]
+
+{ #category : #'building - menus' }
+HRelayoutMenuItem >> buildOn: aMenuMorph [ 
+	| submenu |
+	submenu := MenuMorph new.
+	self class definedLayouts do: [ :layoutClass |  
+		submenu
+		add: layoutClass name
+		target: self 
+		selector: #execute:  
+		argument: layoutClass.
+	].
+   aMenuMorph add: self label subMenu: submenu. 
+]
+
+{ #category : #execution }
+HRelayoutMenuItem >> execute [
+	self applyLayout: shape model.
+]
+
+{ #category : #execution }
+HRelayoutMenuItem >> execute: layoutClass [ 
+   |node|
+   node := shape model.
+   node layout: layoutClass new.
+	self applyLayout: node.
+
 ]
 
 { #category : #accessing }
