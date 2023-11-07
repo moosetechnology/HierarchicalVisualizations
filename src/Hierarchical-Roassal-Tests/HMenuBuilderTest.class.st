@@ -80,7 +80,7 @@ HMenuBuilderTest >> testMenuForNode [
 { #category : #tests }
 HMenuBuilderTest >> testSubmenuLayouts [
    |menuItem menuMorph|
- 	menuItem := HRelayoutCanvasMenuItem new.
+ 	menuItem := HRelayoutMenuItem new.
 	menuMorph := MenuMorph new.
 	menuItem buildOn: menuMorph.
 	self assert: menuMorph items size equals: 1.
