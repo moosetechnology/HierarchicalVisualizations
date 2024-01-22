@@ -12,13 +12,12 @@ Class {
 { #category : #accessing }
 HStyle >> baseLabel [
 
-	^ baseLabel
-]
-
-{ #category : #accessing }
-HStyle >> baseLabel: anObject [
-
-	baseLabel := anObject
+	^ baseLabel ifNil: [
+		  baseLabel := RSLabel new
+			               fontSize: 12;
+			               color: Smalltalk ui theme textColor;
+			               fontName: 'Source Sans Pro';
+			               yourself ]
 ]
 
 { #category : #hooks }
@@ -78,21 +77,18 @@ HStyle >> colorFor: node [
 
 { #category : #initialization }
 HStyle >> initialize [
+
 	super initialize.
-	self boxChildrenColorPalette: (NSScale ordinal range:
-			 Smalltalk ui theme roassalHNodeBackgroundColors).
-	self titleLocation: (RSLocation new insideCornerLeft; offset: 10@0 ).
-	baseLabel := RSLabel new
-		fontSize: 12;
-		color: Smalltalk ui theme textColor;
-		fontName: 'Source Sans Pro';
-		yourself
+	self boxChildrenColorPalette: (NSScale ordinal range: Smalltalk ui theme roassalHNodeBackgroundColors).
+	self titleLocation: (RSLocation new
+			 insideCornerLeft;
+			 offset: 10 @ 0)
 ]
 
 { #category : #hooks }
 HStyle >> labelFor: anHNode [
 
-	^ baseLabel copy
+	^ self baseLabel copy
 		  text: (self textFor: anHNode);
 		  yourself
 ]
