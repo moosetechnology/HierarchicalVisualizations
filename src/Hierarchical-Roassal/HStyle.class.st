@@ -1,3 +1,6 @@
+"
+Implementation note: The styles are computed lazilly to gain speed on visualizations that creates a huge amount of style that are not always used because most nodes are hidden.
+"
 Class {
 	#name : #HStyle,
 	#superclass : #Object,
@@ -35,13 +38,13 @@ HStyle >> borderFor: node [
 
 { #category : #hooks }
 HStyle >> boxChildrenColorFor: anHNode [
-	^ boxChildrenColorPalette scale: anHNode level
+	^ self boxChildrenColorPalette scale: anHNode level
 ]
 
 { #category : #accessing }
 HStyle >> boxChildrenColorPalette [
 
-	^ boxChildrenColorPalette
+	^ boxChildrenColorPalette ifNil: [ boxChildrenColorPalette := NSScale ordinal range: Smalltalk ui theme roassalHNodeBackgroundColors ]
 ]
 
 { #category : #accessing }
@@ -73,16 +76,6 @@ HStyle >> buildCompositeFullNodeIn: shape [
 HStyle >> colorFor: node [
 
 	^ Color colorFrom: (node color ifNil: [ #gray ])
-]
-
-{ #category : #initialization }
-HStyle >> initialize [
-
-	super initialize.
-	self boxChildrenColorPalette: (NSScale ordinal range: Smalltalk ui theme roassalHNodeBackgroundColors).
-	self titleLocation: (RSLocation new
-			 insideCornerLeft;
-			 offset: 10 @ 0)
 ]
 
 { #category : #hooks }
@@ -141,7 +134,10 @@ HStyle >> textFor: aHNode [
 { #category : #hooks }
 HStyle >> titleLocation [
 
-	^ titleLocation
+	^ titleLocation ifNil: [
+		  titleLocation := RSLocation new
+			                   insideCornerLeft;
+			                   offset: 10 @ 0 ]
 ]
 
 { #category : #accessing }
