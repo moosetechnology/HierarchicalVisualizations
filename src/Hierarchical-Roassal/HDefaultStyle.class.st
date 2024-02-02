@@ -1,39 +1,30 @@
 Class {
 	#name : #HDefaultStyle,
 	#superclass : #HStyle,
-	#instVars : [
-		'fullCornerRadius',
-		'topCornerRadius',
-		'bottomCornerRadius'
-	],
+	#traits : 'THWithCornerRadiusStyle',
+	#classTraits : 'THWithCornerRadiusStyle classTrait',
 	#category : #'Hierarchical-Roassal'
 }
 
 { #category : #hooks }
-HDefaultStyle >> bottomCornerRadius [
-	^ bottomCornerRadius ifNil: [ 
-		bottomCornerRadius := RSCornerRadius new 
-			bottom: self cornerRadius ]
-]
-
-{ #category : #hooks }
 HDefaultStyle >> buildCompositeEmptyNodeIn: shape [
+
 	| node box rect |
 	node := shape model.
 	shape addAll: (self labelAndIconFor: node).
 	rect := shape children encompassingRectangle.
-	box := RSBox new 
-		position: rect floatCenter;
-		extent: rect extent + 10;
-		cornerRadius: self fullCornerRadius;
-		color: (self colorFor: node);
-		border: (self borderFor: node);
-		yourself.
+	box := RSBox new
+		       position: rect floatCenter;
+		       extent: rect extent + 10;
+		       cornerRadius: self cornerRadius;
+		       color: (self colorFor: node);
+		       border: (self borderFor: node);
+		       yourself.
 	shape add: box.
 	box pushBack.
-	shape schildren: #().
-	
-	shape 
+	shape schildren: #(  ).
+
+	shape
 		propertyAt: #background put: box;
 		adjustToChildren
 ]
@@ -41,13 +32,14 @@ HDefaultStyle >> buildCompositeEmptyNodeIn: shape [
 { #category : #hooks }
 HDefaultStyle >> buildCompositeFullNodeIn: shape [
 
-	| childrenShapes node titleGroup title titleBox children boxChildren titleRadius boxChildrenRadius list |
+	| childrenShapes node titleGroup title titleBox children boxChildren  list |
 	node := shape model.
 	titleGroup := self labelAndIconFor: node.
 	titleBox := RSBox new
 		            extent: titleGroup extent + 10;
 		            color: ((self colorFor: node) alpha: 0.7);
 		            position: titleGroup position;
+		            cornerRadius: self cornerRadius;
 		            yourself.
 	title := RSComposite new
 		         add: titleBox;
@@ -69,24 +61,17 @@ HDefaultStyle >> buildCompositeFullNodeIn: shape [
 			title adjustToChildren ]
 		ifFalse: [ children width: title width ].
 	boxChildren := self boxChildrenFor: node.
-	titleRadius := self topCornerRadius.
-	boxChildrenRadius := self bottomCornerRadius.
-	list := {
-		        title.
-		        children }.
 
-	self titleLocation = #below ifTrue: [
-		titleRadius := self bottomCornerRadius.
-		boxChildrenRadius := self topCornerRadius.
-		list := {
-			        children.
-			        title } ].
+	list := self titleLocation = #below
+		ifTrue: [ { children. title } ]
+		ifFalse: [ { title. children } ].
+
 	RSVerticalLineLayout new
 		gapSize: 0;
 		on: list.
-	titleBox cornerRadius: titleRadius.
+
 	boxChildren
-		cornerRadius: boxChildrenRadius;
+		cornerRadius: self cornerRadius;
 		fromRectangle: children encompassingRectangle.
 
 	shape
@@ -94,19 +79,6 @@ HDefaultStyle >> buildCompositeFullNodeIn: shape [
 		add: boxChildren;
 		add: children.
 	shape adjustToChildren
-]
-
-{ #category : #hooks }
-HDefaultStyle >> cornerRadius [
-
-	^ 7
-]
-
-{ #category : #hooks }
-HDefaultStyle >> fullCornerRadius [
-	^ fullCornerRadius ifNil: [ 
-		fullCornerRadius := RSCornerRadius new 
-			radius: self cornerRadius ]
 ]
 
 { #category : #hooks }
@@ -147,13 +119,6 @@ HDefaultStyle >> titleLocationAbove [
 HDefaultStyle >> titleLocationBelow [
 
 	titleLocation := #below
-]
-
-{ #category : #hooks }
-HDefaultStyle >> topCornerRadius [
-	^ topCornerRadius ifNil: [ 
-		topCornerRadius := RSCornerRadius new 
-			top: self cornerRadius ]
 ]
 
 { #category : #hooks }
