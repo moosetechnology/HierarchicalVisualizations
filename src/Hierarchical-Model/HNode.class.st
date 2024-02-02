@@ -65,13 +65,17 @@ HNode >> addedIn: anHNode [
 
 { #category : #accessing }
 HNode >> allChildren [
-	| allChildren index |
-	index := 1.
-	allChildren := OrderedCollection withAll: self children.
-	[index <= allChildren size] whileTrue: 
-			[allChildren addAll: (allChildren at: index) children.
-			index := index + 1].
-	^allChildren
+
+	^ self allChildren: OrderedCollection new
+]
+
+{ #category : #accessing }
+HNode >> allChildren: aCollection [
+
+	self children do: [ :each |
+		aCollection add: each.
+		each allChildren: aCollection ].
+	^ aCollection
 ]
 
 { #category : #dependencies }
