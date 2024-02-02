@@ -267,8 +267,13 @@ HNode >> doesParentDisplayLinks [
 
 { #category : #public }
 HNode >> expand [
+
 	isExpanded := true.
-	self announce: (HExpandEvent new node: self)
+	self announce: (HExpandEvent new node: self).
+
+	"In case I have only 1 child of the same type as my model, I'll expand recusively because this is probably what the user will do in most cases.
+	This is a behavior equivalent to other IDE such as VSCode when a folder contains only one folder or as Intellij when a java package contains only one java package."
+	(self children size = 1 and: [ self rawModel class = self children anyOne rawModel class ]) ifTrue: [ self children anyOne expand ]
 ]
 
 { #category : #public }
