@@ -113,11 +113,6 @@ HSimpleVisualizationBuilder >> colorFor: node [
 	^ Color colorFrom: (node color ifNil: [ #gray ])
 ]
 
-{ #category : #'accessing - attributes' }
-HSimpleVisualizationBuilder >> cornerRadius [
-	^ 7
-]
-
 { #category : #'accessing - defaults' }
 HSimpleVisualizationBuilder >> createBoxSelectionFor: shape [
 	| border canvas |
