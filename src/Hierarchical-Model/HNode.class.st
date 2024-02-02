@@ -485,6 +485,7 @@ HNode >> printOn: stream [
 
 { #category : #announcer }
 HNode >> privateAnnouncer [
+
 	^ announcer
 ]
 
