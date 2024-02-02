@@ -64,21 +64,21 @@ HDefaultStyle >> buildCompositeFullNodeIn: shape [
 	children useRTree.
 	childrenShapes do: [ :child | child model position: child position ].
 	title width < children width
-		ifTrue: [ 
+		ifTrue: [
 			titleBox width: children width.
 			title adjustToChildren ]
 		ifFalse: [ children width: title width ].
 	boxChildren := self boxChildrenFor: node.
 	titleRadius := self topCornerRadius.
 	boxChildrenRadius := self bottomCornerRadius.
-	list := { 
+	list := {
 		        title.
 		        children }.
 
-	self titleLocation = #below ifTrue: [ 
+	self titleLocation = #below ifTrue: [
 		titleRadius := self bottomCornerRadius.
 		boxChildrenRadius := self topCornerRadius.
-		list := { 
+		list := {
 			        children.
 			        title } ].
 	RSVerticalLineLayout new

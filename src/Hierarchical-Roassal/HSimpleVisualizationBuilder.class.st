@@ -8,15 +8,10 @@ Class {
 		'rootNode',
 		'menuInteraction',
 		'highlightable',
-		'labeled',
-		'colorPalette',
-		'topCornerRadius',
-		'bottomCornerRadius',
-		'boxChildrenColor',
-		'fullCornerRadius',
 		'baseNode',
 		'linkStyler',
-		'popup'
+		'popup',
+		'mapModel'
 	],
 	#category : #'Hierarchical-Roassal-Visualization'
 }
@@ -78,103 +73,6 @@ HSimpleVisualizationBuilder >> borderFor: node [
 			dashArray: #(5 10);
 			yourself  ]
 		ifFalse: [ nil ]
-]
-
-{ #category : #'accessing - attributes' }
-HSimpleVisualizationBuilder >> bottomCornerRadius [
-	^ bottomCornerRadius ifNil: [ 
-		bottomCornerRadius := RSCornerRadius new 
-			bottom: self cornerRadius ]
-]
-
-{ #category : #'public - hooks' }
-HSimpleVisualizationBuilder >> boxChildrenColorFor: anHNode [
-	^ boxChildrenColor scale: anHNode level
-]
-
-{ #category : #accessing }
-HSimpleVisualizationBuilder >> boxChildrenColorPalette: aNSOrdinalScale [
-	boxChildrenColor := aNSOrdinalScale
-]
-
-{ #category : #'public - hooks' }
-HSimpleVisualizationBuilder >> boxChildrenFor: anHNode [
-	^ RSBox new
-		color: (self boxChildrenColorFor: anHNode);
-		yourself.
-]
-
-{ #category : #hooks }
-HSimpleVisualizationBuilder >> buildCompositeEmptyNodeIn: shape [
-	| node box rect |
-	node := shape model.
-	shape addAll: (self nodeStyler labelAndIconFor: node).
-	rect := shape children encompassingRectangle.
-	box := RSBox new 
-		model: node;
-		position: rect floatCenter;
-		extent: rect extent + 10;
-		cornerRadius: self fullCornerRadius;
-		color: (self colorFor: node);
-		border: (self borderFor: node);
-		yourself.
-	shape add: box.
-	box pushBack.
-	shape schildren: #().
-	
-	shape 
-		propertyAt: #background put: box;
-		adjustToChildren
-]
-
-{ #category : #hooks }
-HSimpleVisualizationBuilder >> buildCompositeFullNodeIn: shape [
-	| childrenShapes node titleGroup title titleBox children 
-	boxChildren titleRadius boxChildrenRadius list |
-	node := shape model.
-	titleGroup := self nodeStyler labelAndIconFor: node.
-	titleBox := RSBox new
-		extent: titleGroup extent + 10;
-		color: ((self colorFor: node) alpha: 0.7);
-		position: titleGroup position;
-		yourself.
-	title := RSComposite new
-		add: titleBox; 
-		addAll: titleGroup;
-		adjustToChildren;
-		yourself.
-	shape propertyAt: #background put: titleBox.
-	childrenShapes := self childrenFor: node.
-	self layoutOn: childrenShapes parent: node.
-	
-	shape schildren: childrenShapes.
-	childrenShapes do: [ :child | child sparent: shape ].
-	children := childrenShapes asShape
-		padding: 10.
-	childrenShapes do: [ :child | child model position: child position ].
-	title width < children width
-		ifTrue: [ titleBox width: children width. title adjustToChildren ]
-		ifFalse: [ children width: title width ].
-	boxChildren := self boxChildrenFor: node.
-	titleRadius := self topCornerRadius.
-	boxChildrenRadius := self bottomCornerRadius.
-	list := { title. children }.
-	self nodeStyler position = #below ifTrue: [ 
-		titleRadius := self bottomCornerRadius.
-		boxChildrenRadius := self topCornerRadius.
-		list := { children. title }.
-		 ].
-	RSVerticalLineLayout new
-		gapSize: 0;
-		on: list.
-	titleBox cornerRadius: titleRadius.
-	boxChildren
-		cornerRadius: boxChildrenRadius;
-		fromRectangle: children encompassingRectangle.
-	
-	shape add: title; add: boxChildren; add: children.
-	shape adjustToChildren.
-	
 ]
 
 { #category : #'accessing - defaults' }
@@ -297,13 +195,6 @@ HSimpleVisualizationBuilder >> fixShadowForSelectedShape: shape and: newShape [
 ]
 
 { #category : #'accessing - attributes' }
-HSimpleVisualizationBuilder >> fullCornerRadius [
-	^ fullCornerRadius ifNil: [ 
-		fullCornerRadius := RSCornerRadius new 
-			radius: self cornerRadius ]
-]
-
-{ #category : #'accessing - attributes' }
 HSimpleVisualizationBuilder >> highlightable [
 
 	^ highlightable ifNil: [
@@ -337,8 +228,6 @@ HSimpleVisualizationBuilder >> initialize [
 
 	super initialize.
 	self linkStyler: HLinkStyler new.
-	self boxChildrenColorPalette: (NSScale ordinal range:
-			 Smalltalk ui theme roassalHNodeBackgroundColors).
 	self popup: RSPopup new
 ]
 
@@ -368,6 +257,18 @@ HSimpleVisualizationBuilder >> linkStyler [
 { #category : #accessing }
 HSimpleVisualizationBuilder >> linkStyler: anHLinkStyler [
 	linkStyler :=anHLinkStyler
+]
+
+{ #category : #accessing }
+HSimpleVisualizationBuilder >> mapModel [
+
+	^ mapModel
+]
+
+{ #category : #accessing }
+HSimpleVisualizationBuilder >> mapModel: anObject [
+
+	mapModel := anObject
 ]
 
 { #category : #'accessing - attributes' }
@@ -558,11 +459,4 @@ HSimpleVisualizationBuilder >> rootShapeFrom: shape [
 HSimpleVisualizationBuilder >> shapeFor: node [
 
 	^ node asShape
-]
-
-{ #category : #'accessing - attributes' }
-HSimpleVisualizationBuilder >> topCornerRadius [
-	^ topCornerRadius ifNil: [ 
-		topCornerRadius := RSCornerRadius new 
-			top: self cornerRadius ]
 ]
