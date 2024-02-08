@@ -51,6 +51,19 @@ HNode >> addChild: anHNode [
 		yourself)
 ]
 
+{ #category : #'computing - dependencies' }
+HNode >> addDependentsFromLinksForNodeTo: aSet [
+
+	aSet addAll: (self dependencies
+			 select: [ :link | self shouldDisplayLink: link ]
+			 thenCollect: [ :link | link from visibleNodeOrParent ]).
+
+
+	(self isExpanded and: [ self isVisible and: [ self isLinksExpanded ] ]) ifTrue: [ ^ aSet ].
+	self children do: [ :child | child addDependentsFromLinksForNodeTo: aSet ].
+	^ aSet
+]
+
 { #category : #adding }
 HNode >> addLink: link [
 	self dependencies isArray 
@@ -222,18 +235,8 @@ HNode >> dependentsFromLinks [
 
 { #category : #'computing - dependencies' }
 HNode >> dependentsFromLinksForNode [
-	| set |
-	set := self dependencies
-		select: [ :link | self shouldDisplayLink: link ]
-		thenCollect: [:link | link from visibleNodeOrParent ].
-	
-	set := set asSet.
-	(self isExpanded and: [ self isVisible and: [ self isLinksExpanded ] ]) 
-		ifTrue: [ ^ set ].
-	self children do: [ :child | 
-		set addAll: child dependentsFromLinksForNode ].
-	^ set
-	
+
+	^ self addDependentsFromLinksForNodeTo: Set new
 ]
 
 { #category : #dependencies }
