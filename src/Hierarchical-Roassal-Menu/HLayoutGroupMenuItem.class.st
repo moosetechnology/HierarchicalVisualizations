@@ -5,8 +5,14 @@ Class {
 }
 
 { #category : #accessing }
-HLayoutGroupMenuItem class >> definedLayouts [ 
-	 ^ { RSGridLayout . RSFlowLayout . RSCircleLayout }.
+HLayoutGroupMenuItem class >> definedLayouts [
+
+	^ {
+		  RSGridLayout.
+		  RSFlowLayout.
+		  RSCircleLayout.
+		  RSTreeLayout.
+		  RSForceBasedLayout }
 ]
 
 { #category : #accessing }
