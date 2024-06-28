@@ -1,5 +1,5 @@
 "
-This menu item uses the layout of an HNode to place roassal shapes in their positions
+This menu item uses the layout of an HNode to place roassal shapes in their positions.
 "
 Class {
 	#name : #HRelayoutMenuItem,

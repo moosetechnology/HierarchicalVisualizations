@@ -23,7 +23,7 @@ HNewEntityMenuItem >> group [
 
 { #category : #accessing }
 HNewEntityMenuItem >> label [
-	^ 'New Entity'
+	^ 'New entity'
 ]
 
 { #category : #accessing }

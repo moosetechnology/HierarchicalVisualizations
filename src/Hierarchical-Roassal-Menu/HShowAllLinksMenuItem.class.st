@@ -1,5 +1,5 @@
 "
-this menu item show all the links of the node and all children
+This menu item shows all the links of the node and all children.
 "
 Class {
 	#name : #HShowAllLinksMenuItem,
@@ -20,7 +20,7 @@ HShowAllLinksMenuItem >> group [
 
 { #category : #accessing }
 HShowAllLinksMenuItem >> label [
-	^ 'Show All links'
+	^ 'Show all links'
 ]
 
 { #category : #accessing }
