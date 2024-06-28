@@ -20,7 +20,7 @@ HHideAllLinksMenuItem >> group [
 
 { #category : #accessing }
 HHideAllLinksMenuItem >> label [
-	^ 'Hide All links'
+	^ 'Hide all links'
 ]
 
 { #category : #accessing }

@@ -36,11 +36,6 @@ HAddLinkMenuItem >> execute [
 					visualization rebuildLines: shape.
 					].
 			evt signalUpdate ].
-	
-		
-	
-	
-	
 ]
 
 { #category : #accessing }
@@ -58,7 +53,6 @@ HAddLinkMenuItem >> modelFor: aShape [
 	^ aShape model 
 		ifNil: [ self modelFor: aShape parent ]
 		ifNotNil: [ aShape model ]
-	
 ]
 
 { #category : #accessing }
