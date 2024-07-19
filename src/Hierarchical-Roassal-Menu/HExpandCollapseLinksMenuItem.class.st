@@ -2,17 +2,18 @@
 this menu allow to the user collase only link but not nodes
 "
 Class {
-	#name : #HExpandCollapseLinksMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HExpandCollapseLinksMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 HExpandCollapseLinksMenuItem >> canBeExecuted [
 	^ shape model children isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseLinksMenuItem >> execute [
 	| node |
 	node := shape model.
@@ -22,19 +23,19 @@ HExpandCollapseLinksMenuItem >> execute [
 	visualization rebuildLines: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseLinksMenuItem >> group [
 	^ 3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseLinksMenuItem >> label [
 	^ shape model isLinksExpanded
 		ifTrue: [ 'Collapse external links' ] 
 		ifFalse: [ 'Expand external links' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseLinksMenuItem >> order [
 	^ 80
 ]

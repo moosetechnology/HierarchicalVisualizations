@@ -2,12 +2,13 @@
 This menu item adds a new draggable interaction to the canvas and then creates a new line between the selected nodes
 "
 Class {
-	#name : #HAddLinkMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HAddLinkMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HAddLinkMenuItem >> execute [
 	| canvas line  pointer |
 	canvas := visualization canvas.
@@ -38,24 +39,24 @@ HAddLinkMenuItem >> execute [
 			evt signalUpdate ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAddLinkMenuItem >> group [
 	^ 2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAddLinkMenuItem >> label [
 	^ 'Add dependency to'
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HAddLinkMenuItem >> modelFor: aShape [
 	^ aShape model 
 		ifNil: [ self modelFor: aShape parent ]
 		ifNotNil: [ aShape model ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAddLinkMenuItem >> order [
 	^ 40
 ]

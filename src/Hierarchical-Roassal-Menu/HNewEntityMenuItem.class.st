@@ -2,12 +2,13 @@
 This menu item open a new request dialog to get the name of the new node of the selected node
 "
 Class {
-	#name : #HNewEntityMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HNewEntityMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HNewEntityMenuItem >> execute [
 	| name node |
 	name := HNewContainerMenuItem requestName.
@@ -16,17 +17,17 @@ HNewEntityMenuItem >> execute [
 	node add: (HNode named: name; yourself).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewEntityMenuItem >> group [
 	^ 2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewEntityMenuItem >> label [
 	^ 'New entity'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewEntityMenuItem >> order [
 	^ 30
 ]

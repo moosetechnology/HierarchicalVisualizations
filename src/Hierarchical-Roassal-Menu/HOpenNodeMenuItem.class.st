@@ -2,17 +2,18 @@
 Open a new window
 "
 Class {
-	#name : #HOpenNodeMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HOpenNodeMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HOpenNodeMenuItem >> canBeExecuted [
 	^ shape model hasChildren
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HOpenNodeMenuItem >> execute [
 	| copy |
 	copy := shape model copy.
@@ -20,12 +21,12 @@ HOpenNodeMenuItem >> execute [
 	copy open
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HOpenNodeMenuItem >> group [
 	^ 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HOpenNodeMenuItem >> label [
 	^ 'Open node'
 ]
