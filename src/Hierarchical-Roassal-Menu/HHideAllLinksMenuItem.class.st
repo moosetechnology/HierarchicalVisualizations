@@ -2,28 +2,29 @@
 This menu item hide all the links for this node and all children
 "
 Class {
-	#name : #HHideAllLinksMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HHideAllLinksMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HHideAllLinksMenuItem >> execute [
 	shape model hideAllLinks.
 	visualization rebuildLines: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideAllLinksMenuItem >> group [
 	^ 3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideAllLinksMenuItem >> label [
 	^ 'Hide all links'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideAllLinksMenuItem >> order [
 	^ 60
 ]

@@ -6,15 +6,16 @@ Entry point is `buildIn: aMorph shape: aShape visualization: aCanvas`
 Items in the menu are provided by the method `menuItemsFor:`
 "
 Class {
-	#name : #HMenuBuilder,
-	#superclass : #Object,
+	#name : 'HMenuBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'menuItemStrategy'
 	],
-	#category : #'Hierarchical-Roassal-Menu'
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 HMenuBuilder >> buildIn: aMenuMorph shape: aRoassalShape visualization: anHSimpleVisualizationBuilder [
 
 	| items |
@@ -27,7 +28,7 @@ HMenuBuilder >> buildIn: aMenuMorph shape: aRoassalShape visualization: anHSimpl
 		withItems: items
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HMenuBuilder >> buildIn: aMenuMorph shape: aRoassalShape visualization: anHSimpleVisualizationBuilder withItems: items [
 
 	| groups |
@@ -44,32 +45,32 @@ HMenuBuilder >> buildIn: aMenuMorph shape: aRoassalShape visualization: anHSimpl
 		separatedBy: [ aMenuMorph addSeparator ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HMenuBuilder >> groupItems: items [
 
 	^ items groupedBy: [ :item | item group ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HMenuBuilder >> initialize [
 
 	super initialize.
 	menuItemStrategy := HDefaultMenuItemStrategy new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HMenuBuilder >> menuItemStrategy [
 
 	^ menuItemStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HMenuBuilder >> menuItemStrategy: anObject [
 
 	menuItemStrategy := anObject
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HMenuBuilder >> menuItemsFor: aShape [
 
 	^ (menuItemStrategy menuItemClassesFor: aShape) collect: #new

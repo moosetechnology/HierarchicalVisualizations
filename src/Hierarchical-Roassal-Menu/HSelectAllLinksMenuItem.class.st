@@ -2,31 +2,32 @@
 This menu item selects all the links of the node.
 "
 Class {
-	#name : #HSelectAllLinksMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HSelectAllLinksMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HSelectAllLinksMenuItem >> execute [
 
 	visualization container setSelectedShapes:
 		shape outgoingShapes , shape incomingShapes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSelectAllLinksMenuItem >> group [
 
 	^ 3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSelectAllLinksMenuItem >> label [
 
 	^ 'Select all links'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSelectAllLinksMenuItem >> order [
 
 	^ 100

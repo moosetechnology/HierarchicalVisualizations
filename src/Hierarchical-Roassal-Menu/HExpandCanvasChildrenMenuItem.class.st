@@ -2,22 +2,23 @@
 This menu item expands the direct children of the root node
 "
 Class {
-	#name : #HExpandCanvasChildrenMenuItem,
-	#superclass : #HCanvasMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HExpandCanvasChildrenMenuItem',
+	#superclass : 'HCanvasMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HExpandCanvasChildrenMenuItem >> execute [
 	[visualization rootNode expandChildren] timeProfile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCanvasChildrenMenuItem >> label [
 	^ 'Expand children'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCanvasChildrenMenuItem >> order [
 	^ 5
 ]

@@ -2,12 +2,13 @@
 reorganize the canvas with the layout of the root node
 "
 Class {
-	#name : #HRelayoutCanvasMenuItem,
-	#superclass : #HCanvasMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HRelayoutCanvasMenuItem',
+	#superclass : 'HCanvasMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HRelayoutCanvasMenuItem >> execute [
 	| rootNode |
 	rootNode := visualization rootNode.
@@ -16,17 +17,17 @@ HRelayoutCanvasMenuItem >> execute [
 	visualization container signalUpdate.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutCanvasMenuItem >> group [
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutCanvasMenuItem >> label [
 	^ 'Relayout'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutCanvasMenuItem >> order [
 	^ 70
 ]
