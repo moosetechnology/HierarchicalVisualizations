@@ -522,6 +522,13 @@ HNode >> remove [
 ]
 
 { #category : 'removing' }
+HNode >> remove: anHNode [
+
+	children remove: anHNode
+	
+]
+
+{ #category : 'removing' }
 HNode >> removeAllLinks [
 
 	self allDependencies asSet do: [ :link | 
