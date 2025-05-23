@@ -2,62 +2,64 @@
 this class defines a basic link between nodes
 "
 Class {
-	#name : #HLink,
-	#superclass : #Object,
+	#name : 'HLink',
+	#superclass : 'Object',
 	#instVars : [
 		'from',
 		'to',
 		'visible',
 		'rawModel'
 	],
-	#category : #'Hierarchical-Model-Core'
+	#category : 'Hierarchical-Model-Core',
+	#package : 'Hierarchical-Model',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> from [
 
 	^ from
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> from: anObject [
 
 	from := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HLink >> initialize [
 	super initialize.
 	self isVisible: true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HLink >> isVisible [
 	^ visible
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HLink >> isVisible: aBoolean [
 	visible := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> rawModel [
 	^ rawModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> rawModel: aClass [ 
 	rawModel := aClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> to [
 
 	^ to
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLink >> to: anObject [
 
 	to := anObject

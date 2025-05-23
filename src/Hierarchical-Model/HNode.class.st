@@ -2,8 +2,8 @@
 TODO
 "
 Class {
-	#name : #HNode,
-	#superclass : #Object,
+	#name : 'HNode',
+	#superclass : 'Object',
 	#traits : 'RSTAnnounceable',
 	#classTraits : 'RSTAnnounceable classTrait',
 	#instVars : [
@@ -21,28 +21,30 @@ Class {
 		'color',
 		'style'
 	],
-	#category : #'Hierarchical-Model-Core'
+	#category : 'Hierarchical-Model-Core',
+	#package : 'Hierarchical-Model',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 HNode class >> named: aString [
 	^ self new
 		name: aString;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 HNode >> add: anHNode [
 	anHNode addedIn: self.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 HNode >> addAll: aCollection [
 	aCollection do: [ :item | self add: item ]
 	
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 HNode >> addChild: anHNode [
 	children add: anHNode.
 	anHNode parent: self.
@@ -51,7 +53,7 @@ HNode >> addChild: anHNode [
 		yourself)
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> addDependentsFromLinksForNodeTo: aSet [
 
 	aSet addAll: (self dependencies
@@ -64,25 +66,25 @@ HNode >> addDependentsFromLinksForNodeTo: aSet [
 	^ aSet
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 HNode >> addLink: link [
 	self dependencies isArray 
 		ifTrue: [ dependencies := dependencies asOrderedCollection ].
 	dependencies add: link
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 HNode >> addedIn: anHNode [
 	anHNode addChild: self.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> allChildren [
 
 	^ self allChildren: OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> allChildren: aCollection [
 
 	self children do: [ :each |
@@ -91,7 +93,7 @@ HNode >> allChildren: aCollection [
 	^ aCollection
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> allDependencies [
 	^ self dependencies, (self hasChildren 
 		ifTrue: [ self children flatCollect: [ :child|
@@ -99,7 +101,7 @@ HNode >> allDependencies [
 		ifFalse: [ #() ])
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> allRawModelDependenciesIn: aHNode [ 
 	| list nodesToCompare |
 	list := OrderedCollection new.
@@ -110,7 +112,7 @@ HNode >> allRawModelDependenciesIn: aHNode [
 	^ list collect: [:each | each rawModel].
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> allRawModelDependenciesIn: nodesToCompare fill: result [ 
 
 	| selection |
@@ -120,57 +122,57 @@ HNode >> allRawModelDependenciesIn: nodesToCompare fill: result [
 	
 ]
 
-{ #category : #announcer }
+{ #category : 'announcer' }
 HNode >> announcementClasses [
 	^ #()
 ]
 
-{ #category : #announcer }
+{ #category : 'announcer' }
 HNode >> announcer: anAnnouncer [
 	announcer := anAnnouncer
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 HNode >> asShape [
 
 	^ self style shapeFor: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> children [
 
 	^ children
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> children: aCollection [
 	children := aCollection
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> collapse [
 	isExpanded := false.
 	self announce: (HCollapseEvent new node: self)
 	
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> collapseChildren [
 	children do: [ :child | child collapse ].
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> collapseLinks [
 	isLinksExpanded := false.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> color [
 
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> color: aColor [
 	| oldColor |
 	oldColor := color.
@@ -181,31 +183,31 @@ HNode >> color: aColor [
 		yourself).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> defaultStyle [
 
 	^ HDefaultStyle new
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependencies [
 
 	^ dependencies ifNil: [ dependencies := #() ]
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependencies: aCollectionOfLinks [
 	dependencies := aCollectionOfLinks asOrderedCollection
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependenciesToNodes: aCollection [
 	dependencies isArray ifTrue: [ 
 		dependencies := OrderedCollection new: aCollection size. ].
 	aCollection do: [ :node | self dependencyTo: node ].
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependencyTo: anHNode [
 	| link |
 	link := HLink new
@@ -217,7 +219,7 @@ HNode >> dependencyTo: anHNode [
 	^ link
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependencyTo: aHNode withModel: anObject [
 	"self haltIf: [ name = 'nodeClass' and: [ aHNode name = 'AIReducedGraphNode' ]]."
 	^ (self dependencyTo: aHNode)
@@ -225,7 +227,7 @@ HNode >> dependencyTo: aHNode withModel: anObject [
 		yourself
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> dependentsFromLinks [
 	"main code to generate lines between nodes"
 	^ self doesParentDisplayLinks
@@ -233,13 +235,13 @@ HNode >> dependentsFromLinks [
 		ifFalse: [ self dependentsToLinksForNode: self parentNotDisplayLinks ].
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> dependentsFromLinksForNode [
 
 	^ self addDependentsFromLinksForNodeTo: Set new
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 HNode >> dependentsToLinks [
 	^ (self dependencies 
 		select: [ :link | link from = self ]
@@ -247,7 +249,7 @@ HNode >> dependentsToLinks [
 			link to visibleNodeOrParent ]) asSet.
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> dependentsToLinksForNode: aNode [
 	| set |
 	set := self dependencies
@@ -262,13 +264,13 @@ HNode >> dependentsToLinksForNode: aNode [
 	^ set
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> doesParentDisplayLinks [
 	parent ifNil: [ ^ true ].
 	^ parent isVisible and: [ parent isLinksExpanded and: [ parent doesParentDisplayLinks ] ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> expand [
 
 	isExpanded := true.
@@ -279,25 +281,25 @@ HNode >> expand [
 	(self children size = 1 and: [ self rawModel class = self children anyOne rawModel class ]) ifTrue: [ self children anyOne expand ]
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> expandChildren [
 	children do: [ :child | child isExpanded: true ].
 	self announce: HExpandChildrenEvent new
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> expandCollapse [
 	isExpanded 
 		ifTrue: [ self collapse ]
 		ifFalse: [ self expand ].
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNode >> expandLinks [
 	isLinksExpanded := true.
 ]
 
-{ #category : #utility }
+{ #category : 'utility' }
 HNode >> fixDependencies: node [
 	node dependencies: (node dependencies collect: [:link | | linkCopy |
 		linkCopy := link copy.
@@ -309,13 +311,13 @@ HNode >> fixDependencies: node [
 	node children do: [ :child | self fixDependencies: child ].
 ]
 
-{ #category : #utility }
+{ #category : 'utility' }
 HNode >> fixDependents [
 	self fixDependencies: self.
 	
 ]
 
-{ #category : #'accessing - computed' }
+{ #category : 'accessing - computed' }
 HNode >> globalChildEquals: anHNode [
 	anHNode ifNil: [ ^ nil ].
 	rawModel = anHNode rawModel ifTrue: [ 
@@ -330,17 +332,17 @@ HNode >> globalChildEquals: anHNode [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> hasChildren [
 	^ children notEmpty
 ]
 
-{ #category : #'showing - hiding' }
+{ #category : 'showing - hiding' }
 HNode >> hideAllLinks [
 	self allDependencies do: [ :link | link isVisible: false ]
 ]
 
-{ #category : #'showing - hiding' }
+{ #category : 'showing - hiding' }
 HNode >> hideIncomingLinks [
 	self dependencies
 		select: [ :link | link to = self ]
@@ -348,7 +350,7 @@ HNode >> hideIncomingLinks [
 	self children do: #hideIncomingLinks
 ]
 
-{ #category : #'showing - hiding' }
+{ #category : 'showing - hiding' }
 HNode >> hideLinkTo: anHNode [
 	self allDependencies do: [ :link | 
 		link to visibleNodeOrParent = anHNode ifTrue: [ 
@@ -357,7 +359,7 @@ HNode >> hideLinkTo: anHNode [
 
 ]
 
-{ #category : #'showing - hiding' }
+{ #category : 'showing - hiding' }
 HNode >> hideOutgoingLinks [
 	self dependencies
 		select: [ :link | link from = self ]
@@ -365,12 +367,12 @@ HNode >> hideOutgoingLinks [
 	self children do: #hideOutgoingLinks
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> iconName [
 	^ iconName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> iconName: aString [
 	| oldName |
 	oldName := iconName.
@@ -381,7 +383,7 @@ HNode >> iconName: aString [
 		yourself).
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HNode >> initialize [
 	super initialize.
 	children := OrderedCollection new.
@@ -389,51 +391,51 @@ HNode >> initialize [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> isExpanded [
 	^ isExpanded
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> isExpanded: aBoolean [ 
 
 	isExpanded := aBoolean
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> isLinksExpanded [
 	^ isLinksExpanded
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> isVisible [
 	parent ifNil: [ ^ true ].
 	^ parent isExpanded and: [ parent isVisible ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> layout [
 	^ layout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> layout: aLayout [
 	layout := aLayout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> level [
 	^ parent 
 		ifNil: [ 0 ]
 		ifNotNil: [ 1 + parent level ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> name: aString [
 	| oldName |
 	oldName := name.
@@ -445,19 +447,19 @@ HNode >> name: aString [
 		
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> parent [
 
 	^ parent
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> parent: anHNode [
 
 	parent := anHNode
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> parentNotDisplayLinks [
 	parent ifNil: [ ^ self ].
 	(parent isVisible and: [ parent isLinksExpanded not ])
@@ -466,18 +468,18 @@ HNode >> parentNotDisplayLinks [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> position [
 
 	^ position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> position: aPoint [
 	position := aPoint
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 HNode >> postCopy [
 	self 
 		children: (self children collect: [:child | child copy ]);
@@ -486,34 +488,45 @@ HNode >> postCopy [
 	self children do: [ :child | child parent: self ].
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 HNode >> printOn: stream [
 	stream << (name ifNil: [ 'nil' ])
 ]
 
-{ #category : #announcer }
+{ #category : 'announcer' }
 HNode >> privateAnnouncer [
 
 	^ announcer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> rawModel [
 
 	^ rawModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> rawModel: anObject [
 	rawModel := anObject
 ]
 
-{ #category : #removing }
-HNode >> removeLink: anHLink [
-	dependencies remove: anHLink
+{ #category : 'removing' }
+HNode >> remove [
+
+	self removeAllLinks.
+	parent ifNotNil: [ parent remove: self ].
+	self announce: (HNodeRemovedEvent new
+		removedNode: self;
+		yourself).
+	
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
+HNode >> removeLink: anHLink [
+	dependencies remove: anHLink ifAbsent: [ ] 
+]
+
+{ #category : 'removing' }
 HNode >> removeLinkTo: anHNode [
 	
 	self allDependencies do: [ :link | 
@@ -524,38 +537,38 @@ HNode >> removeLinkTo: anHNode [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> shouldDisplayLink: anHLink [
 	| link |
 	link := anHLink.
 	^ link isVisible and: [ link to = self ] 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HNode >> shouldDisplayLink: anHLink in: aNode [
 	| link |
 	link := anHLink.
 	^ link isVisible and: [ link to = self and: [ (aNode globalChildEquals: link from) notNil ] ] 
 ]
 
-{ #category : #'showing - hiding' }
+{ #category : 'showing - hiding' }
 HNode >> showAllLinks [
 	self allDependencies do: [ :link | link isVisible: true ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> style [
 
 	^ style ifNil: [ style := self defaultStyle ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> style: anObject [
 
 	style := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> topParent [
 	^ parent 
 		ifNil: [ self ]
@@ -563,7 +576,7 @@ HNode >> topParent [
 
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> visibleNodeOrParent [
 	parent ifNil: [ ^ self ].
 	^ (self isVisible and: [ parent isLinksExpanded ])
@@ -571,7 +584,7 @@ HNode >> visibleNodeOrParent [
 		ifFalse: [ parent visibleNodeOrParent ]
 ]
 
-{ #category : #'computing - dependencies' }
+{ #category : 'computing - dependencies' }
 HNode >> visibleNodeOrParentIn: aNode [
 	parent ifNil: [ ^ self ].
 	^ self isVisible
@@ -579,7 +592,7 @@ HNode >> visibleNodeOrParentIn: aNode [
 		ifFalse: [ parent visibleNodeOrParentIn: aNode ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNode >> withAllChildren [
 	^ self allChildren
 		add: self;

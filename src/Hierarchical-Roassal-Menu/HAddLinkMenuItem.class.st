@@ -10,33 +10,36 @@ Class {
 
 { #category : 'execution' }
 HAddLinkMenuItem >> execute [
-	| canvas line  pointer |
+
+	| canvas line pointer |
 	canvas := visualization canvas.
 	pointer := RSEllipse new
-		noPaint;
-		withBorder;
-		size: 5;
-		yourself.
+		           noPaint;
+		           withBorder;
+		           size: 5;
+		           yourself.
 	line := visualization lineBuilder edgeFrom: shape to: pointer.
 	canvas add: pointer.
-	{canvas. visualization baseNode} asGroup
-		when: RSMouseMove do: [ :evt | 
-			pointer 
+	{
+		canvas.
+		visualization baseNode } asGroup
+		when: RSMouseMove do: [ :evt |
+			pointer
 				translateTo: evt position;
-				signalUpdate ];
-		when: RSMouseClick do: [:evt | 
-			line remove. 
-			pointer remove. 
-			visualization baseNode removeInteractionIfPresent: self class.
-			canvas removeInteractionIfPresent: self class.
-			
-			canvas
-				propertyAt: visualization highlightable propertyKey
-				ifPresent: [:shapes |
-					shape model dependencyTo: (self modelFor: shapes last).
-					visualization rebuildLines: shape.
-					].
-			evt signalUpdate ].
+				signalUpdate ]
+		for: self;
+		when: RSMouseClick do: [ :evt |
+		line remove.
+		pointer remove.
+		visualization baseNode removeInteractionIfPresent: self class.
+		canvas removeInteractionIfPresent: self class.
+
+		canvas
+			propertyAt: visualization highlightable propertyKey
+			ifPresent: [ :shapes |
+				shape model dependencyTo: (self modelFor: shapes last).
+				visualization rebuildLines: shape ].
+		evt signalUpdate ]
 ]
 
 { #category : 'accessing' }

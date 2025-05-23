@@ -1,1 +1,1 @@
-Package { #name : #'Hierarchical-Model-Tests' }
+Package { #name : 'Hierarchical-Model-Tests' }

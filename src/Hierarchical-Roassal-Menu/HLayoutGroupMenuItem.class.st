@@ -1,10 +1,11 @@
 Class {
-	#name : #HLayoutGroupMenuItem,
-	#superclass : #HGroupMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HLayoutGroupMenuItem',
+	#superclass : 'HGroupMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLayoutGroupMenuItem class >> definedLayouts [
 
 	^ {
@@ -15,7 +16,7 @@ HLayoutGroupMenuItem class >> definedLayouts [
 		  RSForceBasedLayout }
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLayoutGroupMenuItem >> buildOn: aMenuMorph [
 	| submenu |
 	submenu := MenuMorph new.
@@ -29,7 +30,7 @@ HLayoutGroupMenuItem >> buildOn: aMenuMorph [
    aMenuMorph add: self label subMenu: submenu.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLayoutGroupMenuItem >> execute: aLayoutClass [
 
 	| center |
@@ -41,7 +42,7 @@ HLayoutGroupMenuItem >> execute: aLayoutClass [
 	visualization canvas selectedShapes translateTo: center
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLayoutGroupMenuItem >> label [
 
 	^ 'Layout'

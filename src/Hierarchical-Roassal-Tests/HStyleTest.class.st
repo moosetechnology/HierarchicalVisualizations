@@ -1,40 +1,41 @@
 Class {
-	#name : #HStyleTest,
-	#superclass : #ParametrizedTestCase,
+	#name : 'HStyleTest',
+	#superclass : 'ParametrizedTestCase',
 	#instVars : [
 		'styleClass',
 		'rootNode'
 	],
-	#category : #'Hierarchical-Roassal-Tests'
+	#category : 'Hierarchical-Roassal-Tests',
+	#package : 'Hierarchical-Roassal-Tests'
 }
 
-{ #category : #'building suites' }
+{ #category : 'building suites' }
 HStyleTest class >> testParameters [
 	^ ParametrizedTestMatrix new
 		forSelector: #styleClass
 		addOptions: HStyle allSubclasses
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 HStyleTest >> setUp [
 
 	super setUp.
 	rootNode := HNode named: 'ROOT'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyleTest >> styleClass [
 
 	^ styleClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyleTest >> styleClass: anObject [
 
 	styleClass := anObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HStyleTest >> testShapeForWithChildren [
 
 	| style |
@@ -44,7 +45,7 @@ HStyleTest >> testShapeForWithChildren [
 	self assert: ((style shapeFor: rootNode) isKindOf: RSShape)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HStyleTest >> testShapeForWithNoChildren [
 
 	| style |

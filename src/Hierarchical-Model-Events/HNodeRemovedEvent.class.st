@@ -1,24 +1,21 @@
-"
-todo
-"
 Class {
-	#name : 'HNodeAddedEvent',
+	#name : 'HNodeRemovedEvent',
 	#superclass : 'HEvent',
 	#instVars : [
-		'newChild'
+		'removedNode'
 	],
 	#category : 'Hierarchical-Model-Events',
 	#package : 'Hierarchical-Model-Events'
 }
 
 { #category : 'accessing' }
-HNodeAddedEvent >> newChild [
+HNodeRemovedEvent >> removedNode [
 
-	^ newChild
+	^ removedNode
 ]
 
 { #category : 'accessing' }
-HNodeAddedEvent >> newChild: anObject [
+HNodeRemovedEvent >> removedNode: anObject [
 
-	newChild := anObject
+	removedNode := anObject
 ]

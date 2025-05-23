@@ -2,21 +2,22 @@
 todo
 "
 Class {
-	#name : #HEvent,
-	#superclass : #Announcement,
+	#name : 'HEvent',
+	#superclass : 'Announcement',
 	#instVars : [
 		'node'
 	],
-	#category : #'Hierarchical-Model-Events'
+	#category : 'Hierarchical-Model-Events',
+	#package : 'Hierarchical-Model-Events'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HEvent >> node [
 
 	^ node
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HEvent >> node: anObject [
 
 	node := anObject

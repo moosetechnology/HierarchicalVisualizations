@@ -3,12 +3,14 @@ This is a custom ghost draggable allowing to move several nodes.
 Because this visualization supports multiple selection
 "
 Class {
-	#name : #HGhostDraggable,
-	#superclass : #RSGhostDraggable,
-	#category : #'Hierarchical-Roassal-Interactions'
+	#name : 'HGhostDraggable',
+	#superclass : 'RSGhostDraggable',
+	#category : 'Hierarchical-Roassal-Interactions',
+	#package : 'Hierarchical-Roassal',
+	#tag : 'Interactions'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HGhostDraggable >> createGhost: evt [
 	| shapes |
 	shapes := evt canvas selectedShapes.
@@ -18,7 +20,7 @@ HGhostDraggable >> createGhost: evt [
 
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HGhostDraggable >> removeGhost: evt [
 	| shapes |
 	shapes := evt canvas selectedShapes.
@@ -31,7 +33,7 @@ HGhostDraggable >> removeGhost: evt [
 
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HGhostDraggable >> updateGhost: evt [
 	| shapes d |
 	shapes := evt canvas selectedShapes.

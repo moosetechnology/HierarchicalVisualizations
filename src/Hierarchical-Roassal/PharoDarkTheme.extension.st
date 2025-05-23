@@ -1,6 +1,6 @@
-Extension { #name : #PharoDarkTheme }
+Extension { #name : 'PharoDarkTheme' }
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 PharoDarkTheme >> roassalHNodeBackgroundColors [
 	^ {#gray. '404040'}
 ]
