@@ -2,12 +2,14 @@
 A HLinkTest is a test class for testing the behavior of HLink
 "
 Class {
-	#name : #HLinkTest,
-	#superclass : #TestCase,
-	#category : #'Hierarchical-Model-Tests-Core'
+	#name : 'HLinkTest',
+	#superclass : 'TestCase',
+	#category : 'Hierarchical-Model-Tests-Core',
+	#package : 'Hierarchical-Model-Tests',
+	#tag : 'Core'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 HLinkTest >> testRawModel [
 	| link |
 	link := HLink new.
@@ -15,7 +17,7 @@ HLinkTest >> testRawModel [
 	self assert: link rawModel equals: Collection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HLinkTest >> testVisible [
 	| node1 node2 subnode1 subnode2 rootNode |
 	node1 := HNode named: 'Node1'.

@@ -1,6 +1,6 @@
-Extension { #name : #UITheme }
+Extension { #name : 'UITheme' }
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 UITheme >> roassalHNodeBackgroundColors [
 	^ #(lightGray veryLightGray)
 ]

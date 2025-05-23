@@ -2,12 +2,14 @@
 A HNodeTest is a test class for testing the behavior of HNode
 "
 Class {
-	#name : #HNodeTest,
-	#superclass : #TestCase,
-	#category : #'Hierarchical-Model-Tests-Core'
+	#name : 'HNodeTest',
+	#superclass : 'TestCase',
+	#category : 'Hierarchical-Model-Tests-Core',
+	#package : 'Hierarchical-Model-Tests',
+	#tag : 'Core'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAddDependencyWithModel [
 	| node1 node2 link createdLink |
 	node1 := HNode new rawModel: Collection.
@@ -20,7 +22,7 @@ HNodeTest >> testAddDependencyWithModel [
 	self assert: link equals: createdLink.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAllRawModelDependenciesIn [
 	| node1 node2 createdLink list |
 	node1 := HNode new rawModel: Collection.
@@ -32,7 +34,7 @@ HNodeTest >> testAllRawModelDependenciesIn [
 	self assert: list first equals: createdLink rawModel.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAllRawModelDependenciesIn2 [
 	| n1 n11 n2 n21 list |
 	n1 := HNode new.
@@ -52,7 +54,7 @@ HNodeTest >> testAllRawModelDependenciesIn2 [
 	self assert: list asArray equals: { 'model1'. 'model2' }.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAllRawModelDependenciesIn3 [
 	| n1 n11 n2 n21 list list2 |
 	n1 := HNode new.
@@ -74,7 +76,7 @@ HNodeTest >> testAllRawModelDependenciesIn3 [
 	self assert: list2 asArray equals: { 'model3'. 'model2' }.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAllRawModelDependenciesIn4 [
 	| n1 n11 n2 n21 list |
 	n1 := HNode new.
@@ -94,7 +96,7 @@ HNodeTest >> testAllRawModelDependenciesIn4 [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testAsShape [
 
 	| hNode |
@@ -103,7 +105,7 @@ HNodeTest >> testAsShape [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testBasic [
 	| node1 node2 subnode1 subnode2 rootNode w nodeWithoutTitle |
 	node1 := HNode named: 'Node1'.
@@ -122,7 +124,7 @@ HNodeTest >> testBasic [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testCollapseLinks [
 	| node1 node2 subnode1 subnode2 subnode3 subnode4 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -160,7 +162,7 @@ HNodeTest >> testCollapseLinks [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testCollapseNodes [
 	| node1 node2 subnode1 subnode2 subnode3 subnode4 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -196,7 +198,7 @@ HNodeTest >> testCollapseNodes [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testCollapseNodes3Levels [
 	| node1 node2 subnode1 subnode2 subnode3 subnode4 gnode1 gnode2 gnode3 gnode4 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -229,7 +231,7 @@ HNodeTest >> testCollapseNodes3Levels [
 	self deny: node2 dependentsFromLinks isEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testDependencies [
 	| node1 node2 subnode1 subnode2 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -259,7 +261,7 @@ HNodeTest >> testDependencies [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testDependencyTo [
 	| node1 node2 subnode1 subnode2 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -277,7 +279,7 @@ HNodeTest >> testDependencyTo [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testExpandChildren [
 	| node1 node2 subnode1 subnode2 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -295,7 +297,7 @@ HNodeTest >> testExpandChildren [
 	self assert: subnode1 isVisible.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testLevel [
 	| node1 node2 subnode1 subnode2 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -311,7 +313,30 @@ HNodeTest >> testLevel [
 	self assert: subnode1 level equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+HNodeTest >> testRemove [
+	
+	| rootNode node1 node2 eventSent |
+	rootNode := HNode named: 'Root'.
+	node1 := HNode named: 'Node1'.
+	node2 := HNode named: 'Node2'.
+	rootNode addAll: {node1. node2 }.
+	
+	node1 dependenciesToNodes: { node2 }.
+	eventSent := false.
+	"The remove event should be sent when the node is removed"
+	node1 when: HNodeRemovedEvent
+		do: [ :evt | eventSent := true ] for: self.
+	node1 remove.
+		
+	self assert: rootNode children size equals: 1.
+	self assert: node2 dependencies isEmpty.
+	self assert: eventSent
+	
+	
+]
+
+{ #category : 'tests' }
 HNodeTest >> testRemoveLink01 [
 	| node1 node2 sub1 sub2 sub3 sub4 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -335,7 +360,7 @@ HNodeTest >> testRemoveLink01 [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testRemoveLink02 [
 	| node1 node2 sub1 sub2 sub3 sub4 rootNode |
 	node1 := HNode named: 'Node1'.
@@ -360,7 +385,7 @@ HNodeTest >> testRemoveLink02 [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HNodeTest >> testStyle [
 
 	| hNode style |

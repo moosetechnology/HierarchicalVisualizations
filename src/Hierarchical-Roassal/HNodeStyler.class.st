@@ -2,8 +2,8 @@
 You can create a subclass of HLabeler, you will need to override the method labelFor:
 "
 Class {
-	#name : #HNodeStyler,
-	#superclass : #Object,
+	#name : 'HNodeStyler',
+	#superclass : 'Object',
 	#instVars : [
 		'fontName',
 		'fontSize',
@@ -12,56 +12,58 @@ Class {
 		'popup',
 		'location'
 	],
-	#category : #'Hierarchical-Roassal-Configuration'
+	#category : 'Hierarchical-Roassal-Configuration',
+	#package : 'Hierarchical-Roassal',
+	#tag : 'Configuration'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 HNodeStyler >> above [
 	location := #above
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HNodeStyler >> below [
 	location := #below
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> color [
 
 	^ color
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> color: anObject [
 
 	color := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> fontName [
 
 	^ fontName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> fontName: aFontname [
 
 	fontName := aFontname
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> fontSize [
 
 	^ fontSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> fontSize: anInteger [
 
 	fontSize := anInteger
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HNodeStyler >> iconFor: anHNode [
 	anHNode iconName ifNil: [ ^ nil ].
 	^ RSBitmap new
@@ -70,7 +72,7 @@ HNodeStyler >> iconFor: anHNode [
 		
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HNodeStyler >> initialize [
 	super initialize.
 	self text: #yourself.
@@ -81,7 +83,7 @@ HNodeStyler >> initialize [
 	self above
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HNodeStyler >> labelAndIconFor: anHNode [
 	| group icon |
 	group := RSGroup new.
@@ -93,7 +95,7 @@ HNodeStyler >> labelAndIconFor: anHNode [
 	^ group.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HNodeStyler >> labelFor: anHNode [
 	^ RSLabel new
 		color: (self color rsValue: anHNode);
@@ -103,37 +105,37 @@ HNodeStyler >> labelFor: anHNode [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> location [
 
 	^ location
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> popup [
 
 	^ popup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> popup: anObject [
 
 	popup := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> text [
 
 	^ text
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNodeStyler >> text: aStringOrABlock [
 
 	text := aStringOrABlock
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HNodeStyler >> textFor: anHNode [
 	^ text rsValue: anHNode
 ]

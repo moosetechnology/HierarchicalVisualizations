@@ -1,6 +1,6 @@
-Extension { #name : #HNode }
+Extension { #name : 'HNode' }
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 HNode >> open [
 	^ HSimpleVisualizationBuilder new
 		rootNode: self;
