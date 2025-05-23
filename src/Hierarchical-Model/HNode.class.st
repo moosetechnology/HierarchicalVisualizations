@@ -522,6 +522,14 @@ HNode >> remove [
 ]
 
 { #category : 'removing' }
+HNode >> removeAllLinks [
+
+	self allDependencies asSet do: [ :link | 
+		link to removeLink: link.
+		link from removeLink: link ]
+]
+
+{ #category : 'removing' }
 HNode >> removeLink: anHLink [
 	dependencies remove: anHLink ifAbsent: [ ] 
 ]
