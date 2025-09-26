@@ -38,10 +38,17 @@ HStyleTest >> styleClass: anObject [
 { #category : 'tests' }
 HStyleTest >> testShapeForWithChildren [
 
-	| style |
+	| style mockEntity mockTag |
 	style := styleClass new.
-	1 to: 10 do: [ :i | 
-		rootNode add: (HNode named: 'number ' , i asString) ].
+	mockEntity := Mock named: 'AnEnitty'.
+	mockTag := Mock named: 'ATag'.
+	mockEntity stub tags willReturn: { mockTag }.
+	mockTag stub color willReturn: Color red.
+
+
+	1 to: 10 do: [ :i |
+			rootNode add:
+				((HNode named: 'number ' , i asString) rawModel: mockEntity) ].
 	self assert: ((style shapeFor: rootNode) isKindOf: RSShape)
 ]
 
