@@ -36,7 +36,7 @@ BaselineOfHierarchicalVisualizations >> customProjectAttributes [
 { #category : 'baselines' }
 BaselineOfHierarchicalVisualizations >> defineDependencies: spec [
 
-	spec for: #nNeedsRoassal do: [ self roassal: spec ].
+	spec for: #NeedsRoassal do: [ self roassal: spec ].
 	spec for: #NeedsMocketry do: [ self mocketry: spec ]
 ]
 
