@@ -66,10 +66,15 @@ BaselineOfHierarchicalVisualizations >> definePackages: spec [
 		package: 'Hierarchical-Examples';
 		package: 'Hierarchical-Roassal-Tests'.
 
+	spec for: #NeedsMocketry do: [
+			spec
+				package: 'Hierarchical-Roassal-Tests'
+				with: [ spec requires: #( 'Mocketry' ) ] ].
+
 	spec for: #NeedsRoassal do: [
 			spec
 				package: 'Hierarchical-Roassal'
-				with: [ spec requires: #( 'Roassal' ) ] ]
+				with: [ spec requires: #( 'Roassal' ) ] ].
 ]
 
 { #category : 'baselines - dependencies' }
