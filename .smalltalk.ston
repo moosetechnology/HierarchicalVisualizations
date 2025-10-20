@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'HoerarchicalVisualizations',
+      #baseline : 'HierarchicalVisualizations',
       #directory : 'src'
     }
   ]
