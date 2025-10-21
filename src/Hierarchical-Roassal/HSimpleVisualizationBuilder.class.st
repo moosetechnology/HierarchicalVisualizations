@@ -11,7 +11,8 @@ Class {
 		'baseNode',
 		'linkStyler',
 		'popup',
-		'mapModel'
+		'mapModel',
+		'nodeStyle'
 	],
 	#category : 'Hierarchical-Roassal-Visualization',
 	#package : 'Hierarchical-Roassal',
@@ -146,6 +147,12 @@ HSimpleVisualizationBuilder >> defaultContainer [
 	canvas @ (self canvasController: canvas).
 	canvas @ (self elasticBoxFor: canvas).
 	^ canvas
+]
+
+{ #category : 'accessing - defaults' }
+HSimpleVisualizationBuilder >> defaultNodeStyle [
+
+	^HDefaultStyleWithTags new
 ]
 
 { #category : 'accessing - defaults' }
@@ -308,6 +315,12 @@ HSimpleVisualizationBuilder >> nodeAnnouncer [
 		yourself.
 	^ baseNode announcer
 	
+]
+
+{ #category : 'accessing - defaults' }
+HSimpleVisualizationBuilder >> nodeStyle [
+
+	^nodeStyle ifNil: [ nodeStyle := self defaultNodeStyle ]
 ]
 
 { #category : 'hooks' }
