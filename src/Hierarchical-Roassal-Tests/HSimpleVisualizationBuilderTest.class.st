@@ -67,6 +67,34 @@ HSimpleVisualizationBuilderTest >> testColorPalette [
 ]
 
 { #category : 'tests' }
+HSimpleVisualizationBuilderTest >> testHighlightLabelFromLine [
+
+	| root node1 visualization node2 line high |
+	root := HNode named: 'Visualization'.
+	node1 := HNode named: 'Node1'.
+	node2 := HNode named: 'Node2'.
+	node1 dependencyTo: node2.
+	root addAll: {
+			node1.
+			node2 }.
+
+	visualization := HSimpleVisualizationBuilder new
+		                 rootNode: root;
+		                 build;
+		                 yourself.
+
+	line := visualization canvas lines anyOne.
+	line @ (RSLabeled new text: 'toto').
+	high := (line getInteractionsForClass: RSHighlightable) first.
+	high doHighlightShapes: { line }.
+	self assert: line color equals: Color red.
+	self assert: (line propertyAt: #RSLabeled) color equals: Color red.
+	high doUnhighlight:  line .
+	self deny: line color equals: Color red.
+	self deny: (line propertyAt: #RSLabeled) color equals: Color red.
+]
+
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testMoveOneChildInParent [
 	| root node1  subnode1 visualization shapeNode1 shapeSubnode1 |
 	root := HNode named: 'Visualization'.
