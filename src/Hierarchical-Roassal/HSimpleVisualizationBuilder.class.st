@@ -205,29 +205,37 @@ HSimpleVisualizationBuilder >> fixShadowForSelectedShape: shape and: newShape [
 HSimpleVisualizationBuilder >> highlightable [
 
 	^ highlightable ifNil: [
-		  highlightable := RSHighlightable new
-			                   highlightShapes: [ :shape |
-				                   | list |
-				                   list := shape connectedLines copy.
-				                   list add: (shape propertyAt: #background).
-				                   list ];
-			                   when: RSHighlightEvent do: [ :evt |
-				                   | color |
-				                   color := evt shape isNode
-					                            ifTrue: [ evt shape color muchDarker ]
-					                            ifFalse: [ Color red ].
-				                   highlightable
-					                   record: evt shape
-					                   selector: #color
-					                   value: color ]
-			                   for: self;
-			                   when: RSUnHighlightEvent
-			                   do: [ :evt |
-				                   highlightable
-					                   restore: evt shape
-					                   selector: #color ]
-			                   for: self;
-			                   yourself ]
+			  highlightable := RSHighlightable new
+				                   highlightShapes: [ :shape |
+						                   | list |
+						                   list := shape connectedLines copy.
+						                   list add: (shape propertyAt: #background).
+						                   shape connectedLines do: [ :line |
+								                   line
+									                   propertyAt: #RSLabeled
+									                   ifPresent: [ :label | list add: label ] ].
+						                   list ];
+				                   when: RSHighlightEvent do: [ :evt |
+						                   | color |
+						                   color := evt shape isNode
+							                            ifTrue: [
+									                            evt shape isLabel
+										                            ifTrue: [ Color red ]
+										                            ifFalse: [
+											                            evt shape color muchDarker ] ]
+							                            ifFalse: [ Color red ].
+						                   highlightable
+							                   record: evt shape
+							                   selector: #color
+							                   value: color ]
+				                   for: self;
+				                   when: RSUnHighlightEvent
+				                   do: [ :evt |
+					                   highlightable
+						                   restore: evt shape
+						                   selector: #color ]
+				                   for: self;
+				                   yourself ]
 ]
 
 { #category : 'initialization' }
@@ -452,6 +460,12 @@ HSimpleVisualizationBuilder >> renderLinesIn: aCanvas [
 		connectFromAll: [ :n | n dependentsFromLinks ].
 	announcer := Announcer new.
 	high := RSHighlightable red.
+	high highlightShapes: [ :shape |
+		| list |
+		list := OrderedCollection new: 2.
+		list add: shape.
+		shape propertyAt: #RSLabeled ifPresent: [ :label | list add: label ].
+		list ].
 	high onShape: announcer.
 	self menuInteraction onShape: announcer.
 	aCanvas lines do: [ :line | line announcer: announcer ]
