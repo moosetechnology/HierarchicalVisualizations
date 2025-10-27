@@ -27,7 +27,7 @@ BaselineOfHierarchicalVisualizations >> customProjectAttributes [
 	'BaselineOfMocketry' asPackageIfAbsent: [
 		projectAttributes add: #NeedsMocketry ].
 
-	(Smalltalk globals includesKey: #RSCanvas) ifTrue: [
+	(Smalltalk globals includesKey: #RSCanvas) ifFalse: [
 		projectAttributes add: #NeedsRoassal ].
 
 	^ projectAttributes
