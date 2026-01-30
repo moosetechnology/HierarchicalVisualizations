@@ -23,6 +23,7 @@ HRelayoutMenuItem >> applyLayout: node [
 { #category : 'building - menus' }
 HRelayoutMenuItem >> buildOn: aMenuMorph [ 
 	| submenu |
+	self canBeExecuted ifFalse: [ ^ self ].
 	submenu := MenuMorph new.
 	self class definedLayouts do: [ :layoutClass |  
 		submenu
@@ -34,7 +35,13 @@ HRelayoutMenuItem >> buildOn: aMenuMorph [
    aMenuMorph add: self label subMenu: submenu. 
 ]
 
-{ #category : 'execution' }
+{ #category : #execution }
+HRelayoutMenuItem >> canBeExecuted [
+
+	^ shape model isExpanded
+]
+
+{ #category : #execution }
 HRelayoutMenuItem >> execute [
 	self applyLayout: shape model.
 ]
