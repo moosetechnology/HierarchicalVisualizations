@@ -2,12 +2,13 @@
 This menu item relayout the nodes of the group using RSGridLayout
 "
 Class {
-	#name : #HRelayoutGroupMenuItem,
-	#superclass : #HGroupMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HRelayoutGroupMenuItem',
+	#superclass : 'HGroupMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutGroupMenuItem >> execute [
 	| selectedShapes layout otherShapes |
 	selectedShapes := visualization canvas selectedShapes.
@@ -19,12 +20,12 @@ HRelayoutGroupMenuItem >> execute [
 	RSHorizontalLineLayout new gapSize: 10; on: { otherShapes. selectedShapes }.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutGroupMenuItem >> label [
 	^ 'Relayout'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutGroupMenuItem >> order [
 	^ 10
 ]

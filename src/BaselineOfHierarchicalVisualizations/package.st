@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfHierarchicalVisualizations }
+Package { #name : 'BaselineOfHierarchicalVisualizations' }

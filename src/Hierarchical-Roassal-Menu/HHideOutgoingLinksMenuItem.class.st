@@ -2,28 +2,29 @@
 this menu hide outgoing links
 "
 Class {
-	#name : #HHideOutgoingLinksMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HHideOutgoingLinksMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HHideOutgoingLinksMenuItem >> execute [
 	shape model hideOutgoingLinks.
 	visualization rebuildLines: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideOutgoingLinksMenuItem >> group [
 	^ 3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideOutgoingLinksMenuItem >> label [
 	^ 'Hide outgoing links'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HHideOutgoingLinksMenuItem >> order [
 	^ 62
 ]

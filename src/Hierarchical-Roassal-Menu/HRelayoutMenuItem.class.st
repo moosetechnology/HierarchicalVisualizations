@@ -1,25 +1,26 @@
 "
-This menu item uses the layout of an HNode to place roassal shapes in their positions
+This menu item uses the layout of an HNode to place roassal shapes in their positions.
 "
 Class {
-	#name : #HRelayoutMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HRelayoutMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutMenuItem class >> definedLayouts [ 
 	 ^ { RSGridLayout . RSFlowLayout . RSCircleLayout }.
 
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HRelayoutMenuItem >> applyLayout: node [
 	node children do: [ :child | child position: nil ].
 	visualization rebuildShape: shape.
 ]
 
-{ #category : #'building - menus' }
+{ #category : 'building - menus' }
 HRelayoutMenuItem >> buildOn: aMenuMorph [ 
 	| submenu |
 	self canBeExecuted ifFalse: [ ^ self ].
@@ -45,7 +46,7 @@ HRelayoutMenuItem >> execute [
 	self applyLayout: shape model.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HRelayoutMenuItem >> execute: layoutClass [ 
    |node|
    node := shape model.
@@ -54,17 +55,17 @@ HRelayoutMenuItem >> execute: layoutClass [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutMenuItem >> group [
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutMenuItem >> label [
 	^ 'Relayout'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HRelayoutMenuItem >> order [
 	^ 70
 ]

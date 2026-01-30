@@ -2,34 +2,35 @@
 this menu item, expands or collapses the current node
 "
 Class {
-	#name : #HExpandCollapseMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HExpandCollapseMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 HExpandCollapseMenuItem >> canBeExecuted [
 	^ shape model children isNotEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseMenuItem >> label [
 	^ shape model isExpanded
 		ifTrue: [ 'Collapse' ]
 		ifFalse: [ 'Expand' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseMenuItem >> order [
 	^ 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseMenuItem >> selector [
 	^ #expandCollapse
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandCollapseMenuItem >> target [
 	^ shape model
 ]

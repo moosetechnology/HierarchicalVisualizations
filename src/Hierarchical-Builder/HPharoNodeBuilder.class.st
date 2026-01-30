@@ -112,12 +112,8 @@ HPharoNodeBuilder >> packageQuery: anObject [
 
 { #category : #building }
 HPharoNodeBuilder >> pharoPackages [
-	| org |
-	org := RPackage organizer.
-	^ org packageNames
-		select: [ :s | packageQuery match: s ]
-		thenCollect: [ :s | org packageNamed: s ]
-	
+
+	^ self packageOrganizer packages select: [ :package | packageQuery match: package name ]
 ]
 
 { #category : #building }

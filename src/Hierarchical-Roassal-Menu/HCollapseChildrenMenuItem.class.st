@@ -2,29 +2,30 @@
 this menu item, collapses the children of a node
 "
 Class {
-	#name : #HCollapseChildrenMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HCollapseChildrenMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 HCollapseChildrenMenuItem >> canBeExecuted [
 	^ shape model children isNotEmpty
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HCollapseChildrenMenuItem >> execute [
 	shape schildren do: [ :child | child model removeInteractionIfPresent: visualization class ].
 	shape model collapseChildren.
 	visualization rebuildShape: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HCollapseChildrenMenuItem >> label [
 	^ 'Collapse children'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HCollapseChildrenMenuItem >> order [
 	^ 15
 ]

@@ -1,12 +1,13 @@
 Class {
-	#name : #HDefaultStyle,
-	#superclass : #HStyle,
+	#name : 'HDefaultStyle',
+	#superclass : 'HStyle',
 	#traits : 'THWithCornerRadiusStyle',
 	#classTraits : 'THWithCornerRadiusStyle classTrait',
-	#category : #'Hierarchical-Roassal'
+	#category : 'Hierarchical-Roassal',
+	#package : 'Hierarchical-Roassal'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HDefaultStyle >> buildCompositeEmptyNodeIn: shape [
 
 	| node box rect |
@@ -29,7 +30,7 @@ HDefaultStyle >> buildCompositeEmptyNodeIn: shape [
 		adjustToChildren
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HDefaultStyle >> buildCompositeFullNodeIn: shape [
 
 	| childrenShapes node titleGroup title titleBox children boxChildren  list |
@@ -81,7 +82,7 @@ HDefaultStyle >> buildCompositeFullNodeIn: shape [
 	shape adjustToChildren
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HDefaultStyle >> iconFor: anHNode [
 	anHNode iconName ifNil: [ ^ nil ].
 	^ RSBitmap new
@@ -90,14 +91,14 @@ HDefaultStyle >> iconFor: anHNode [
 		
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HDefaultStyle >> initialize [
 
 	super initialize.
 	self titleLocationAbove
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HDefaultStyle >> labelAndIconFor: anHNode [
 	| group icon |
 	group := RSGroup new.
@@ -109,19 +110,19 @@ HDefaultStyle >> labelAndIconFor: anHNode [
 	^ group.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HDefaultStyle >> titleLocationAbove [
 
 	titleLocation := #above
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HDefaultStyle >> titleLocationBelow [
 
 	titleLocation := #below
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HDefaultStyle >> updateShape: shape with: parent [
 	| children title titleBox boxChildren list style |
 	children := shape parent.

@@ -2,17 +2,18 @@
 Implementation note: The styles are computed lazilly to gain speed on visualizations that creates a huge amount of style that are not always used because most nodes are hidden.
 "
 Class {
-	#name : #HStyle,
-	#superclass : #Object,
+	#name : 'HStyle',
+	#superclass : 'Object',
 	#instVars : [
 		'baseLabel',
 		'boxChildrenColorPalette',
 		'titleLocation'
 	],
-	#category : #'Hierarchical-Roassal'
+	#category : 'Hierarchical-Roassal',
+	#package : 'Hierarchical-Roassal'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyle >> baseLabel [
 
 	^ baseLabel ifNil: [
@@ -23,7 +24,7 @@ HStyle >> baseLabel [
 			               yourself ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> borderFor: node [
 	^ node hasChildren
 		ifTrue: [ RSBorder new 
@@ -36,49 +37,49 @@ HStyle >> borderFor: node [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> boxChildrenColorFor: anHNode [
 	^ self boxChildrenColorPalette scale: anHNode level
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyle >> boxChildrenColorPalette [
 
 	^ boxChildrenColorPalette ifNil: [ boxChildrenColorPalette := NSScale ordinal range: Smalltalk ui theme roassalHNodeBackgroundColors ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyle >> boxChildrenColorPalette: anObject [
 
 	boxChildrenColorPalette := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> boxChildrenFor: anHNode [
 	^ RSBox new
 		color: (self boxChildrenColorFor: anHNode);
 		yourself.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> buildCompositeEmptyNodeIn: shape [
 
 	self subclassResponsibility
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> buildCompositeFullNodeIn: shape [
 
 	self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 HStyle >> colorFor: node [
 
 	^ Color colorFrom: (node color ifNil: [ #gray ])
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> labelFor: anHNode [
 
 	^ self baseLabel copy
@@ -86,7 +87,7 @@ HStyle >> labelFor: anHNode [
 		  yourself
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> layoutOn: aGroupOfShapes parent: anHNode [
 	aGroupOfShapes ifEmpty: [ ^ self ].
 	
@@ -99,7 +100,7 @@ HStyle >> layoutOn: aGroupOfShapes parent: anHNode [
 	
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> relayout: aGroupOfShapes parent: anHNode [
 	anHNode layout ifNil: [ 
 		RSFlowLayout new
@@ -111,7 +112,7 @@ HStyle >> relayout: aGroupOfShapes parent: anHNode [
 	
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> shapeFor: aHNode [
 
 	| shape |
@@ -125,13 +126,13 @@ HStyle >> shapeFor: aHNode [
 	^ shape
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> textFor: aHNode [
 
 	^ aHNode name
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> titleLocation [
 
 	^ titleLocation ifNil: [
@@ -140,13 +141,13 @@ HStyle >> titleLocation [
 			                   offset: 10 @ 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HStyle >> titleLocation: anObject [
 
 	titleLocation := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HStyle >> updateShape: shape with: parent [
 	"use this method to update the layout distribution of one node shape
 	after the children shape is updated"

@@ -2,12 +2,14 @@
 utility class to have always a border in the same position of one box
 "
 Class {
-	#name : #HUpdateSelectionBox,
-	#superclass : #RSInteraction,
-	#category : #'Hierarchical-Roassal-Interactions'
+	#name : 'HUpdateSelectionBox',
+	#superclass : 'RSInteraction',
+	#category : 'Hierarchical-Roassal-Interactions',
+	#package : 'Hierarchical-Roassal',
+	#tag : 'Interactions'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HUpdateSelectionBox >> onShape: aShape [
 	aShape
 		when: RSPositionChangedEvent 
@@ -16,7 +18,7 @@ HUpdateSelectionBox >> onShape: aShape [
 		
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HUpdateSelectionBox >> updateSelectionBox: evt [
 	| border |
 	border := evt shape selectionBox.

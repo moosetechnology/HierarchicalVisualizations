@@ -2,8 +2,8 @@
 A basic visualization based on the video presented by nicolas
 "
 Class {
-	#name : #HSimpleVisualizationBuilder,
-	#superclass : #RSAbstractContainerBuilder,
+	#name : 'HSimpleVisualizationBuilder',
+	#superclass : 'RSAbstractContainerBuilder',
 	#instVars : [
 		'rootNode',
 		'menuInteraction',
@@ -11,18 +11,21 @@ Class {
 		'baseNode',
 		'linkStyler',
 		'popup',
-		'mapModel'
+		'mapModel',
+		'nodeStyle'
 	],
-	#category : #'Hierarchical-Roassal-Visualization'
+	#category : 'Hierarchical-Roassal-Visualization',
+	#package : 'Hierarchical-Roassal',
+	#tag : 'Visualization'
 }
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> addInteractions: aGroupOfShapes [
 
 	aGroupOfShapes do: [ :cs | self addInteractionsToShape: cs ]
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> addInteractionsToShape: aShape [
 
 	| node |
@@ -41,10 +44,13 @@ HSimpleVisualizationBuilder >> addInteractionsToShape: aShape [
 		for: self;
 		when: HNodeChangedEvent
 		do: [ :evt | self rebuildShape: aShape ]
+		for: self;
+		when: HNodeRemovedEvent
+		do: [ :evt | self removeShape: aShape ]
 		for: self
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> addNewNode: evt [
 	| newShape canvas |
 	canvas := self container.
@@ -57,12 +63,12 @@ HSimpleVisualizationBuilder >> addNewNode: evt [
 	canvas signalUpdate
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> baseNode [
 	^ baseNode
 ]
 
-{ #category : #'public - hooks' }
+{ #category : 'public - hooks' }
 HSimpleVisualizationBuilder >> borderFor: node [
 	^ node hasChildren
 		ifTrue: [ RSBorder new 
@@ -75,7 +81,7 @@ HSimpleVisualizationBuilder >> borderFor: node [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #'accessing - defaults' }
+{ #category : 'accessing - defaults' }
 HSimpleVisualizationBuilder >> canvasController: canvas [
 
 	^ RSCanvasController new
@@ -95,12 +101,12 @@ HSimpleVisualizationBuilder >> canvasController: canvas [
 		  yourself
 ]
 
-{ #category : #'public - hooks' }
+{ #category : 'public - hooks' }
 HSimpleVisualizationBuilder >> childrenFor: node [
 	^ node children collect: [ :child | self shapeFor: child ] as: RSGroup
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> childrenShapes: aCanvas [
 
 	^ rootNode children
@@ -108,12 +114,12 @@ HSimpleVisualizationBuilder >> childrenShapes: aCanvas [
 		  as: RSGroup
 ]
 
-{ #category : #'public - hooks' }
+{ #category : 'public - hooks' }
 HSimpleVisualizationBuilder >> colorFor: node [
 	^ Color colorFrom: (node color ifNil: [ #gray ])
 ]
 
-{ #category : #'accessing - defaults' }
+{ #category : 'accessing - defaults' }
 HSimpleVisualizationBuilder >> createBoxSelectionFor: shape [
 	| border canvas |
 	canvas := shape parent.
@@ -134,7 +140,7 @@ HSimpleVisualizationBuilder >> createBoxSelectionFor: shape [
 	
 ]
 
-{ #category : #'accessing - defaults' }
+{ #category : 'accessing - defaults' }
 HSimpleVisualizationBuilder >> defaultContainer [
 	| canvas |
 	canvas := RSCanvas new.
@@ -143,7 +149,13 @@ HSimpleVisualizationBuilder >> defaultContainer [
 	^ canvas
 ]
 
-{ #category : #'accessing - defaults' }
+{ #category : 'accessing - defaults' }
+HSimpleVisualizationBuilder >> defaultNodeStyle [
+
+	^HDefaultStyleWithTags new
+]
+
+{ #category : 'accessing - defaults' }
 HSimpleVisualizationBuilder >> elasticBoxFor: aRSCanvas [
 
 	| elastic selectionHigh |
@@ -170,14 +182,14 @@ HSimpleVisualizationBuilder >> elasticBoxFor: aRSCanvas [
 	^ elastic
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> expandChildren [
 
 	self container shapes do: #remove.
 	self renderIn: self container
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> fixShadowForSelectedShape: shape and: newShape [
 	| canvas selectedShapes border |
 	border := shape selectionBox.
@@ -189,36 +201,44 @@ HSimpleVisualizationBuilder >> fixShadowForSelectedShape: shape and: newShape [
 	selectedShapes at: (selectedShapes indexOf: shape) put: newShape
 ]
 
-{ #category : #'accessing - attributes' }
+{ #category : 'accessing - attributes' }
 HSimpleVisualizationBuilder >> highlightable [
 
 	^ highlightable ifNil: [
-		  highlightable := RSHighlightable new
-			                   highlightShapes: [ :shape |
-				                   | list |
-				                   list := shape connectedLines copy.
-				                   list add: (shape propertyAt: #background).
-				                   list ];
-			                   when: RSHighlightEvent do: [ :evt |
-				                   | color |
-				                   color := evt shape isNode
-					                            ifTrue: [ evt shape color muchDarker ]
-					                            ifFalse: [ Color red ].
-				                   highlightable
-					                   record: evt shape
-					                   selector: #color
-					                   value: color ]
-			                   for: self;
-			                   when: RSUnHighlightEvent
-			                   do: [ :evt |
-				                   highlightable
-					                   restore: evt shape
-					                   selector: #color ]
-			                   for: self;
-			                   yourself ]
+			  highlightable := RSHighlightable new
+				                   highlightShapes: [ :shape |
+						                   | list |
+						                   list := shape connectedLines copy.
+						                   list add: (shape propertyAt: #background).
+						                   shape connectedLines do: [ :line |
+								                   line
+									                   propertyAt: #RSLabeled
+									                   ifPresent: [ :label | list add: label ] ].
+						                   list ];
+				                   when: RSHighlightEvent do: [ :evt |
+						                   | color |
+						                   color := evt shape isNode
+							                            ifTrue: [
+									                            evt shape isLabel
+										                            ifTrue: [ Color red ]
+										                            ifFalse: [
+											                            evt shape color muchDarker ] ]
+							                            ifFalse: [ Color red ].
+						                   highlightable
+							                   record: evt shape
+							                   selector: #color
+							                   value: color ]
+				                   for: self;
+				                   when: RSUnHighlightEvent
+				                   do: [ :evt |
+					                   highlightable
+						                   restore: evt shape
+						                   selector: #color ]
+				                   for: self;
+				                   yourself ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HSimpleVisualizationBuilder >> initialize [
 
 	super initialize.
@@ -226,7 +246,7 @@ HSimpleVisualizationBuilder >> initialize [
 	self popup: RSPopup new
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 HSimpleVisualizationBuilder >> layoutOn: aGroupOfShapes parent: shape [
 	aGroupOfShapes ifEmpty: [ ^ self ].
 	
@@ -239,34 +259,34 @@ HSimpleVisualizationBuilder >> layoutOn: aGroupOfShapes parent: shape [
 	
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> lineBuilder [
 	^ self linkStyler lineBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> linkStyler [
 	^ linkStyler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> linkStyler: anHLinkStyler [
 	linkStyler :=anHLinkStyler
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> mapModel [
 
 	^ mapModel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> mapModel: anObject [
 
 	mapModel := anObject
 ]
 
-{ #category : #'accessing - attributes' }
+{ #category : 'accessing - attributes' }
 HSimpleVisualizationBuilder >> menuInteraction [
 
 	^ menuInteraction ifNil: [ 
@@ -281,13 +301,13 @@ HSimpleVisualizationBuilder >> menuInteraction [
 			                     yourself ]
 ]
 
-{ #category : #'accessing - attributes' }
+{ #category : 'accessing - attributes' }
 HSimpleVisualizationBuilder >> menuItemStrategy [
 
 	^ HDefaultMenuItemStrategy new
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> nodeAnnouncer [
 	"plug new events here"
 	baseNode ifNotNil: [ ^ baseNode announcer ].
@@ -305,19 +325,25 @@ HSimpleVisualizationBuilder >> nodeAnnouncer [
 	
 ]
 
-{ #category : #hooks }
+{ #category : 'accessing - defaults' }
+HSimpleVisualizationBuilder >> nodeStyle [
+
+	^nodeStyle ifNil: [ nodeStyle := self defaultNodeStyle ]
+]
+
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> popup [
 
 	^ popup
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> popup: anObject [
 
 	popup := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> rebuildLines: shape [
 	| canvas |
 	canvas := shape canvas.
@@ -326,14 +352,14 @@ HSimpleVisualizationBuilder >> rebuildLines: shape [
 	canvas signalUpdate.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> rebuildRootShape: shape [
 	| rootShape |
 	rootShape := self rootShapeFrom: shape.
 	self rebuildShape: rootShape.
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> rebuildShape: shape [
 
 	| canvas newShape node parent children allChildrenShapes |
@@ -369,7 +395,7 @@ HSimpleVisualizationBuilder >> rebuildShape: shape [
 	canvas signalUpdate
 ]
 
-{ #category : #layout }
+{ #category : 'layout' }
 HSimpleVisualizationBuilder >> relayout: aGroupOfShapes parent: shape [
 	shape layout ifNil: [ 
 		RSFlowLayout new
@@ -381,7 +407,16 @@ HSimpleVisualizationBuilder >> relayout: aGroupOfShapes parent: shape [
 	
 ]
 
-{ #category : #hooks }
+{ #category : 'removing' }
+HSimpleVisualizationBuilder >> removeShape: aShape [ 
+	
+	aShape remove.
+	shapes remove: aShape.
+	aShape model removeInteractionIfPresent: self class.
+	container signalUpdate
+]
+
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> removeShapeWithAllChildren: shape [
 	
 	shape schildren do: [ :child | self removeShapeWithAllChildren: child. ].
@@ -390,7 +425,7 @@ HSimpleVisualizationBuilder >> removeShapeWithAllChildren: shape [
 	
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 HSimpleVisualizationBuilder >> renderIn: aCanvas [
 
 	| rootShapes |
@@ -415,7 +450,7 @@ HSimpleVisualizationBuilder >> renderIn: aCanvas [
 	self layoutOn: rootShapes parent: rootNode
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> renderLinesIn: aCanvas [
 
 	| announcer high |
@@ -425,22 +460,28 @@ HSimpleVisualizationBuilder >> renderLinesIn: aCanvas [
 		connectFromAll: [ :n | n dependentsFromLinks ].
 	announcer := Announcer new.
 	high := RSHighlightable red.
+	high highlightShapes: [ :shape |
+		| list |
+		list := OrderedCollection new: 2.
+		list add: shape.
+		shape propertyAt: #RSLabeled ifPresent: [ :label | list add: label ].
+		list ].
 	high onShape: announcer.
 	self menuInteraction onShape: announcer.
 	aCanvas lines do: [ :line | line announcer: announcer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> rootNode [
 	^ rootNode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HSimpleVisualizationBuilder >> rootNode: aHNode [ 
 	rootNode := aHNode
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> rootShapeFrom: shape [
 	| parent |
 	parent := shape sparent.
@@ -450,7 +491,7 @@ HSimpleVisualizationBuilder >> rootShapeFrom: shape [
 		
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HSimpleVisualizationBuilder >> shapeFor: node [
 
 	^ node asShape

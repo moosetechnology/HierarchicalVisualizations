@@ -2,21 +2,22 @@
 base class for menu items
 "
 Class {
-	#name : #HAbstractMenuItem,
-	#superclass : #Object,
+	#name : 'HAbstractMenuItem',
+	#superclass : 'Object',
 	#instVars : [
 		'shape',
 		'visualization'
 	],
-	#category : #'Hierarchical-Roassal-Menu'
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> argument [
 	^ nil
 ]
 
-{ #category : #'building - menus' }
+{ #category : 'building - menus' }
 HAbstractMenuItem >> buildOn: aMenuMorph [
 	| item |
 	self canBeExecuted ifFalse: [ ^ self ].
@@ -29,58 +30,58 @@ HAbstractMenuItem >> buildOn: aMenuMorph [
 	item icon: (self iconNamed: self iconName).
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 HAbstractMenuItem >> canBeExecuted [
 	^ true
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HAbstractMenuItem >> execute [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> group [
 	^ 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> iconName [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> label [
 	^ ''
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> order [
 	^ 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> selector [
 	^ #execute
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> shape: anObject [
 
 	shape := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> target [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> visualization [
 
 	^ visualization
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HAbstractMenuItem >> visualization: anObject [
 
 	visualization := anObject

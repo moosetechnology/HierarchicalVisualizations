@@ -2,15 +2,17 @@
 You can define a new style for a RSLineBuilder
 "
 Class {
-	#name : #HLinkStyler,
-	#superclass : #Object,
+	#name : 'HLinkStyler',
+	#superclass : 'Object',
 	#instVars : [
 		'lineBuilder'
 	],
-	#category : #'Hierarchical-Roassal-Configuration'
+	#category : 'Hierarchical-Roassal-Configuration',
+	#package : 'Hierarchical-Roassal',
+	#tag : 'Configuration'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HLinkStyler >> defaultLineBuilder [
 	^ RSLineBuilder line
 		attachPoint: (RSBorderAttachPoint new endOffset: 5);
@@ -19,17 +21,17 @@ HLinkStyler >> defaultLineBuilder [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 HLinkStyler >> initialize [
 	self lineBuilder: self defaultLineBuilder.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLinkStyler >> lineBuilder [
 	^ lineBuilder
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HLinkStyler >> lineBuilder: anObject [
 
 	lineBuilder := anObject

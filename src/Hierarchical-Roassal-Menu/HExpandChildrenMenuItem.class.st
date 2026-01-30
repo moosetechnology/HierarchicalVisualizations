@@ -2,17 +2,18 @@
 expand the node and its children
 "
 Class {
-	#name : #HExpandChildrenMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HExpandChildrenMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 HExpandChildrenMenuItem >> canBeExecuted [
 	^ shape model children isNotEmpty
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HExpandChildrenMenuItem >> execute [
 	shape schildren do: [ :child | child model removeInteractionIfPresent: visualization class ].
 	shape model
@@ -21,12 +22,12 @@ HExpandChildrenMenuItem >> execute [
 	visualization rebuildShape: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandChildrenMenuItem >> label [
 	^ 'Expand children'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandChildrenMenuItem >> order [
 	^ 10
 ]

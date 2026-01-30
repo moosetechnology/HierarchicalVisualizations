@@ -1,1 +1,1 @@
-Package { #name : #'Hierarchical-Roassal-Menu' }
+Package { #name : 'Hierarchical-Roassal-Menu' }

@@ -3,12 +3,13 @@ I am a strategy for HMenuBuilder.
 I define menu items that can be executed (or needed) for a given object.
 "
 Class {
-	#name : #HDefaultMenuItemStrategy,
-	#superclass : #Object,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HDefaultMenuItemStrategy',
+	#superclass : 'Object',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 HDefaultMenuItemStrategy >> classFor: aRoassalShape [
 	aRoassalShape isShape
 		ifFalse: [ ^ HCanvasMenuItem ].
@@ -22,7 +23,7 @@ HDefaultMenuItemStrategy >> classFor: aRoassalShape [
 		
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 HDefaultMenuItemStrategy >> menuItemClassesFor: aShape [
 
 	^ (self classFor: aShape) subclasses , { HInspectorMenuItem }

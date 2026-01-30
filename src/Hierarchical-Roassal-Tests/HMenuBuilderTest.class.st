@@ -1,20 +1,21 @@
 Class {
-	#name : #HMenuBuilderTest,
-	#superclass : #TestCase,
+	#name : 'HMenuBuilderTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'menuBuilder'
 	],
-	#category : #'Hierarchical-Roassal-Tests'
+	#category : 'Hierarchical-Roassal-Tests',
+	#package : 'Hierarchical-Roassal-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 HMenuBuilderTest >> setUp [
 	super setUp.
 	
 	menuBuilder := HMenuBuilder new.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testInspectRawModel [
 	| node rootNode item shape |
 	node := HNode new name: 'Node1' ; rawModel: #anObject.
@@ -29,7 +30,7 @@ HMenuBuilderTest >> testInspectRawModel [
 self assert: item target equals: #anObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testMenuForCanvas [
 
 	| items |
@@ -39,7 +40,7 @@ HMenuBuilderTest >> testMenuForCanvas [
 		(items anySatisfy: [ :i | i class = HInspectorMenuItem ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testMenuForGroup [
 
 	| items shapes canvas |
@@ -53,7 +54,7 @@ HMenuBuilderTest >> testMenuForGroup [
 	self assert: items size equals: HGroupMenuItem subclasses size + 1.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testMenuForLine [
 
 	| items |
@@ -63,7 +64,7 @@ HMenuBuilderTest >> testMenuForLine [
 		(items anySatisfy: [ :i | i class = HInspectorMenuItem ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testMenuForNode [
 
 	| items canvas shape |
@@ -77,7 +78,7 @@ HMenuBuilderTest >> testMenuForNode [
 		(items anySatisfy: [ :i | i class = HInspectorMenuItem ])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HMenuBuilderTest >> testSubmenuLayouts [
    |menuItem menuMorph|
  	menuItem := HRelayoutMenuItem new.

@@ -1,1 +1,1 @@
-Package { #name : #'Hierarchical-Model-Events' }
+Package { #name : 'Hierarchical-Model-Events' }

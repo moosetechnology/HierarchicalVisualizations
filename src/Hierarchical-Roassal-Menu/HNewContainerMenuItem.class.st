@@ -2,17 +2,18 @@
 This menu adds a new node into the visualization using ui manager to write its name
 "
 Class {
-	#name : #HNewContainerMenuItem,
-	#superclass : #HCanvasMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HNewContainerMenuItem',
+	#superclass : 'HCanvasMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 HNewContainerMenuItem class >> requestName [
 	^ UIManager default request: 'Enter a name' initialAnswer: ''
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HNewContainerMenuItem >> execute [
 	| name root |
 	name := self class requestName.
@@ -21,17 +22,17 @@ HNewContainerMenuItem >> execute [
 	root add: (HNode named: name)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewContainerMenuItem >> group [
 	^ 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewContainerMenuItem >> label [
 	^ 'Add Container'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HNewContainerMenuItem >> order [
 	^ 10
 ]

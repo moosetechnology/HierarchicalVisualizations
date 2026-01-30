@@ -2,22 +2,23 @@
 This class allows to the nodes of one group to expand
 "
 Class {
-	#name : #HExpandGroupMenuItem,
-	#superclass : #HGroupMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HExpandGroupMenuItem',
+	#superclass : 'HGroupMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandGroupMenuItem >> execute [
 	visualization canvas selectedShapes do: [ :aShape | aShape model expand ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandGroupMenuItem >> label [
 	^ 'Expand group'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HExpandGroupMenuItem >> order [
 	^ 2
 ]

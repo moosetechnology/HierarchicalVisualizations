@@ -2,23 +2,24 @@
 This class allows to the nodes of one group to collapse
 "
 Class {
-	#name : #HCollapseGroupMenuItem,
-	#superclass : #HGroupMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HCollapseGroupMenuItem',
+	#superclass : 'HGroupMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HCollapseGroupMenuItem >> execute [
 	visualization canvas selectedShapes do: [ :aShape | aShape model collapse ].
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HCollapseGroupMenuItem >> label [
 	^ 'Collapse group'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HCollapseGroupMenuItem >> order [
 	^ 0
 ]

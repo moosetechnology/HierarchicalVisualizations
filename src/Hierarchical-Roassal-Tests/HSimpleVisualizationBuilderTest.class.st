@@ -2,12 +2,13 @@
 A HSimpleVisualizationBuilderTest is a test class for testing the behavior of HSimpleVisualizationBuilder
 "
 Class {
-	#name : #HSimpleVisualizationBuilderTest,
-	#superclass : #TestCase,
-	#category : #'Hierarchical-Roassal-Tests'
+	#name : 'HSimpleVisualizationBuilderTest',
+	#superclass : 'TestCase',
+	#category : 'Hierarchical-Roassal-Tests',
+	#package : 'Hierarchical-Roassal-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testAddingEntity [
 	| root visualization newNode1 newNode2 shapeNode1 shapeNode2 |
 	root := HNode named: 'Visualization'.
@@ -30,7 +31,7 @@ HSimpleVisualizationBuilderTest >> testAddingEntity [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testColorPalette [
 	| root node1 node2 subnode1 subnode2 subnode3 subnode4 gnode1 gnode2 gnode3 gnode4 |
 	root := HNode named: 'Root'.
@@ -65,7 +66,35 @@ HSimpleVisualizationBuilderTest >> testColorPalette [
 		build
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+HSimpleVisualizationBuilderTest >> testHighlightLabelFromLine [
+
+	| root node1 visualization node2 line high |
+	root := HNode named: 'Visualization'.
+	node1 := HNode named: 'Node1'.
+	node2 := HNode named: 'Node2'.
+	node1 dependencyTo: node2.
+	root addAll: {
+			node1.
+			node2 }.
+
+	visualization := HSimpleVisualizationBuilder new
+		                 rootNode: root;
+		                 build;
+		                 yourself.
+
+	line := visualization canvas lines anyOne.
+	line @ (RSLabeled new text: 'toto').
+	high := (line getInteractionsForClass: RSHighlightable) first.
+	high doHighlightShapes: { line }.
+	self assert: line color equals: Color red.
+	self assert: (line propertyAt: #RSLabeled) color equals: Color red.
+	high doUnhighlight:  line .
+	self deny: line color equals: Color red.
+	self deny: (line propertyAt: #RSLabeled) color equals: Color red.
+]
+
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testMoveOneChildInParent [
 	| root node1  subnode1 visualization shapeNode1 shapeSubnode1 |
 	root := HNode named: 'Visualization'.
@@ -89,7 +118,7 @@ HSimpleVisualizationBuilderTest >> testMoveOneChildInParent [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testNodeWithoutTitle [
 
 	| node1 node2 subnode1 subnode2 subnode3 subnode4 rootNode |
@@ -120,7 +149,34 @@ HSimpleVisualizationBuilderTest >> testNodeWithoutTitle [
 	rootNode open delete
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+HSimpleVisualizationBuilderTest >> testRemovingEntity [
+	| root visualization newNode1 newNode2 shapeNode1 shapeNode2 |
+	root := HNode named: 'Visualization'.
+	visualization := HSimpleVisualizationBuilder new
+		rootNode: root;
+		build;
+		yourself.
+	newNode1 := HNode named: 'Node1'.
+	newNode2 := HNode named: 'Node2'.
+	root add: newNode1.
+	root add: newNode2.
+	
+	shapeNode1 := visualization canvas shapeFromModel: newNode1.
+	shapeNode2 := visualization canvas shapeFromModel: newNode2.
+	self assert: shapeNode1 model equals: newNode1.
+	self assert: shapeNode2 model equals: newNode2.
+	newNode1 dependencyTo: newNode2.
+	visualization rebuildLines: shapeNode1.
+	self assert: visualization canvas lines notEmpty.
+	
+	newNode1 remove.
+	
+	self denyCollection:  visualization canvas shapes includesAny: {shapeNode1}.
+	self assert: visualization canvas lines isEmpty.
+]
+
+{ #category : 'tests' }
 HSimpleVisualizationBuilderTest >> testTestMoveNode [
 	| root node1 node2 subnode1 visualization shapeNode1 |
 	"This test is for class HNodeOnTopWhenPositionChanged"

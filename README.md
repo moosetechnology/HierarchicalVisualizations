@@ -1,6 +1,6 @@
 # HierarchicalVisualizations
 
-[![CI/Pharo9](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/runTests.yml/badge.svg)](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/runTests.yml)
+[![Run tests](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/tests.yml/badge.svg)](https://github.com/moosetechnology/HierarchicalVisualizations/actions/workflows/tests.yml)
 
 This project provide a small API to build hierarchical visualization using the [Pharo](http://pharo.org) programming language. HierarchicalVisualizations uses [Roassal](https://github.com/pharo-graphics/Roassal).
 

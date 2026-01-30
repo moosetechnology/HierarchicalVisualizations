@@ -1,38 +1,39 @@
 Class {
-	#name : #HBorderAndTitleStyle,
-	#superclass : #HStyle,
+	#name : 'HBorderAndTitleStyle',
+	#superclass : 'HStyle',
 	#instVars : [
 		'borderWidth',
 		'borderDashArray'
 	],
-	#category : #'Hierarchical-Roassal'
+	#category : 'Hierarchical-Roassal',
+	#package : 'Hierarchical-Roassal'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HBorderAndTitleStyle >> borderDashArray [
 
 	^ borderDashArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HBorderAndTitleStyle >> borderDashArray: anObject [
 
 	borderDashArray := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HBorderAndTitleStyle >> borderWidth [
 
 	^ borderWidth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HBorderAndTitleStyle >> borderWidth: anObject [
 
 	borderWidth := anObject
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HBorderAndTitleStyle >> boxBorderFor: anHNode [
 
 	^ RSBorder new
@@ -43,7 +44,7 @@ HBorderAndTitleStyle >> boxBorderFor: anHNode [
 		  yourself
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HBorderAndTitleStyle >> buildCompositeEmptyNodeIn: shape [
 
 	| node box rect |
@@ -65,7 +66,7 @@ HBorderAndTitleStyle >> buildCompositeEmptyNodeIn: shape [
 		padding: 5 + (self borderWidth / 2)
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HBorderAndTitleStyle >> buildCompositeFullNodeIn: shape [
 
 	| childrenShapes node title children boxChildren |
@@ -96,7 +97,7 @@ HBorderAndTitleStyle >> buildCompositeFullNodeIn: shape [
 	shape adjustToChildren
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HBorderAndTitleStyle >> initialize [
 
 	super initialize.
@@ -104,7 +105,7 @@ HBorderAndTitleStyle >> initialize [
 	borderDashArray := {  }
 ]
 
-{ #category : #hooks }
+{ #category : 'hooks' }
 HBorderAndTitleStyle >> updateShape: shape with: parent [
 	| children title boxChildren |
 	children := shape parent.

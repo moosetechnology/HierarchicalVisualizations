@@ -1,6 +1,6 @@
-Extension { #name : #RSShape }
+Extension { #name : 'RSShape' }
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 RSShape >> removeSelectionBox [
 	| key |
 	key := #selectionBox.
@@ -9,12 +9,12 @@ RSShape >> removeSelectionBox [
 	self removeKey: key.
 ]
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 RSShape >> selectionBox [
 	^ self propertyAt: #selectionBox
 ]
 
-{ #category : #'*Hierarchical-Roassal' }
+{ #category : '*Hierarchical-Roassal' }
 RSShape >> selectionBox: aRSBox [
 	^ self propertyAt: #selectionBox put: aRSBox
 ]

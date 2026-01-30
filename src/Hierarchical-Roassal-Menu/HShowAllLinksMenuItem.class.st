@@ -1,29 +1,30 @@
 "
-this menu item show all the links of the node and all children
+This menu item shows all the links of the node and all children.
 "
 Class {
-	#name : #HShowAllLinksMenuItem,
-	#superclass : #HNodeMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HShowAllLinksMenuItem',
+	#superclass : 'HNodeMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HShowAllLinksMenuItem >> execute [
 	shape model showAllLinks.
 	visualization rebuildLines: shape.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HShowAllLinksMenuItem >> group [
 	^ 3
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HShowAllLinksMenuItem >> label [
-	^ 'Show All links'
+	^ 'Show all links'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HShowAllLinksMenuItem >> order [
 	^ 50
 ]

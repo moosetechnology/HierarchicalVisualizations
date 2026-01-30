@@ -2,37 +2,38 @@
 for inspector
 "
 Class {
-	#name : #HInspectorMenuItem,
-	#superclass : #HAbstractMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HInspectorMenuItem',
+	#superclass : 'HAbstractMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> group [
 	^ 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> iconName [
 	^ #smallInspectIt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> label [
 	^ 'Inspect'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> order [
 	^ 100
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> selector [
 	^ #inspect
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 HInspectorMenuItem >> target [
 	^ shape isShape
 		ifTrue: [ shape model rawModel ]

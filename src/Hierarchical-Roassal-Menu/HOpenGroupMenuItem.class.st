@@ -2,12 +2,13 @@
 This menu item open the selected menu group in a new canvas window
 "
 Class {
-	#name : #HOpenGroupMenuItem,
-	#superclass : #HGroupMenuItem,
-	#category : #'Hierarchical-Roassal-Menu'
+	#name : 'HOpenGroupMenuItem',
+	#superclass : 'HGroupMenuItem',
+	#category : 'Hierarchical-Roassal-Menu',
+	#package : 'Hierarchical-Roassal-Menu'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 HOpenGroupMenuItem >> execute [
 	| listCopy newNode |
 	listCopy := visualization canvas selectedShapes collect: [:node | node model copy ].
@@ -18,12 +19,12 @@ HOpenGroupMenuItem >> execute [
 	newNode open.
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HOpenGroupMenuItem >> group [
 	^ 2
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 HOpenGroupMenuItem >> label [
 	^ 'Open group'
 ]
