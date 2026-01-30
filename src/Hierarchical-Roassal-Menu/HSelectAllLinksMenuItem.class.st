@@ -12,7 +12,7 @@ Class {
 HSelectAllLinksMenuItem >> execute [
 
 	visualization container setSelectedShapes:
-		shape outgoingShapes , shape incomingShapes
+		(shape outgoingShapes , shape incomingShapes) removeDuplicates
 ]
 
 { #category : 'accessing' }
